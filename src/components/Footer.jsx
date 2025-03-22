@@ -21,6 +21,10 @@ const StyledFooter = styled.footer`
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
+
   .footer-content {
     max-width: 1200px;
     width: 100%;
@@ -55,6 +59,11 @@ const StyledFooter = styled.footer`
 
       li {
         margin-bottom: 0.75rem;
+
+        @media screen and (max-width: 768px) {
+          font-size: 1.3rem;
+          margin-bottom: 0.3rem;
+        }
 
         a {
           color: rgba(255, 255, 255, 0.8);
@@ -148,8 +157,12 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Contact Info</h3>
           <ul>
-            <li>Email: {email}</li>
-            <li>Phone: {phone}</li>
+            <li>
+              Email: <a href={`mailto:${email}`}>{email}</a>
+            </li>
+            <li>Phone: <a href={`tel:${phone}`} aria-label="Phone number">
+              Click to call
+            </a></li>
             <li>Address: {location}</li>
           </ul>
         </div>

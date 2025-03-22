@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import AnimatedCard from "../ui/AnimatedCard";
+import { Link } from "react-router-dom";
 
 const StyledHero = styled.div`
   display: flex;
@@ -12,11 +13,23 @@ const StyledHero = styled.div`
     align-items: center;
     gap: 20px;
     padding: 0.5rem 2rem;
+
+    @media (max-width: 768px) {
+      margin-top: 3rem;
+      flex-direction: column;
+      align-items: center;
+    }
+
     h1 {
       font-size: 4rem;
       font-weight: 600;
       line-height: 75px;
       color: #10041c;
+
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+        line-height: 30px;
+      }
     }
     span {
       font-size: 1rem;
@@ -26,6 +39,41 @@ const StyledHero = styled.div`
       border-radius: 1rem;
       padding: 0.3rem 1rem;
       border: 2px solid #5e0fad;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .pulsingDot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #5e0fad;
+      box-shadow: 0 0 10px rgba(94, 15, 173, 0.8);
+      animation: pulsing 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulsing {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(94, 15, 173, 0.8);
+      }
+      50% {
+        transform: scale(1.4);
+        opacity: 0.6;
+        box-shadow: 0 0 20px rgba(94, 15, 173, 1);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(94, 15, 173, 0.8);
+      }
     }
   }
 
@@ -35,6 +83,11 @@ const StyledHero = styled.div`
     line-height: 43px;
     color: #10041c;
     padding: 0.5rem 2rem;
+
+    @media (max-width: 768px) {
+      margin-left: 1rem;
+      margin-bottom: 0.3rem;
+    }
   }
 
   .heroParagraph {
@@ -48,9 +101,12 @@ const StyledHero = styled.div`
   .heroLinks {
     display: flex;
     padding: 0 2rem;
-    align-items: center;
     gap: 20px;
     margin: 20px 0;
+
+    @media (min-width: 768px) {
+      align-items: center;
+    }
 
     @media (max-width: 768px) {
       flex-direction: column; /* Stack buttons on mobile */
@@ -120,7 +176,9 @@ const Hero = () => {
         </AnimatedCard>
 
         <AnimatedCard index={3} variant="fade">
-          <span>Available for New projects</span>
+          <span>
+            <i className="pulsingDot"></i> Available for New projects
+          </span>
         </AnimatedCard>
       </div>
       <AnimatedCard index={2} variant="fade">
@@ -135,8 +193,8 @@ const Hero = () => {
       </AnimatedCard>
       <AnimatedCard index={5} variant="fade">
         <div className="heroLinks">
-          <a href="">About Me</a>
-          <a href="">Explore Works</a>
+          <Link to="about">About Me</Link>
+          <Link to="projects">Explore Works</Link>
         </div>
       </AnimatedCard>
     </StyledHero>

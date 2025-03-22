@@ -5,6 +5,10 @@ const StyledAbout = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem;
+  
+  @media screen and (max-width: 768px) {
+    padding: 2rem 0;
+  }
 
   .header {
     font-size: 4rem;
@@ -81,7 +85,6 @@ const StatsGrid = styled.div`
       }
 
       @media (max-width: 480px) {
-        font-size: 2rem;
         line-height: 40px;
       }
     }
@@ -93,12 +96,11 @@ const StatsGrid = styled.div`
       line-height: 32px;
 
       @media (max-width: 768px) {
-        font-size: 1.125rem;
+        font-size: 1.5rem;
         line-height: 28px;
       }
 
       @media (max-width: 480px) {
-        font-size: 1rem;
         line-height: 24px;
       }
     }
@@ -110,12 +112,11 @@ const StatsGrid = styled.div`
       line-height: 26px;
 
       @media (max-width: 768px) {
-        font-size: 0.875rem;
+        font-size: 1rem;
         line-height: 22px;
       }
 
       @media (max-width: 480px) {
-        font-size: 0.75rem;
         line-height: 20px;
       }
     }

@@ -39,13 +39,13 @@ const LatestProjectsSection = styled.section`
     padding: 3rem 1rem;
 
     .latestHead {
-      flex-direction: column;
       gap: 1rem;
-      text-align: center;
+      text-align: left;
+      padding: 1rem;
     }
 
     h2 {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
 
     a {
@@ -153,10 +153,12 @@ const LatestProjects = () => {
   const latestProjects = projects.slice(-2);
   return (
     <LatestProjectsSection>
-      <div className="latestHead">
-        <h2>Latest Projects</h2>
-        <Link to="projects">View All</Link>
-      </div>
+      <AnimatedCard index={0} variant="fade">
+        <div className="latestHead">
+          <h2>Latest Projects</h2>
+          <Link to="projects">View All</Link>
+        </div>
+      </AnimatedCard>
       <LatestHeadParagraph>
         From concept to reality—explore how we're bringing groundbreaking ideas
         to life.
