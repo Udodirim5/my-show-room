@@ -1,3 +1,4 @@
+import Discuss from "../components/Discuss"
 import Hero from "../components/Hero"
 import LatestProjects from "../components/LatestProjects"
 import TestimonialCarousel from "../ui/TestimonialCarousel"
@@ -8,6 +9,7 @@ const HomePage = () => {
       <Hero />
       <LatestProjects />
       <TestimonialCarousel />
+      <Discuss />
     </div>
   )
 }
