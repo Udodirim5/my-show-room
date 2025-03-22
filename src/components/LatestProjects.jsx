@@ -59,7 +59,6 @@ const LatestHeadParagraph = styled.p`
   font-size: 1.2rem;
   color: #333;
   padding: 0 2rem;
-  text-align: center;
 
   @media (max-width: 768px) {
     font-size: 1rem;

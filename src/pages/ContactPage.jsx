@@ -51,6 +51,7 @@ const ContactContainer = styled.div`
     font-weight: 400;
     line-height: 27px;
     margin-top: 8px;
+    color: #10041cae;
 
     @media (max-width: 768px) {
       font-size: 1.125rem;
@@ -266,9 +267,11 @@ const ContactLinks = styled.div`
     column-gap: 3rem;
     row-gap: 1rem;
     margin-top: 10px;
+    padding: 2rem;
 
     @media (max-width: 480px) {
       grid-template-columns: repeat(2, 1fr);
+      padding: 1rem;
     }
   }
 
@@ -293,7 +296,7 @@ const ContactLinks = styled.div`
     }
 
     &:hover {
-      border: 2px solid #10041c;
+      border: 1px solid #10041c;
     }
   }
 `;
@@ -365,7 +368,7 @@ const ContactPage = () => {
               <FaComments className="icon" />
               <strong>Get support</strong>
             </div>
-            <a href={`https//:wa.me/${phone}`}>Chat with us</a>
+            <a href={`https://wa.me/${phone}`} target="blank">Chat with us</a>
           </div>
           <div className="contactItem">
             <div>

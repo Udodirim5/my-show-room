@@ -61,7 +61,7 @@ export const personalInfo = {
   socialLinks: [
     {
       name: "LinkedIn",
-      url: "https://www.linkedin.com/in/udodirim-nnodimele-966855197/",
+      url: "https://www.linkedin.com/in/udodirim-nnodimele-814b5a287/",
     },
     {
       name: "Github",

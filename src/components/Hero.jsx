@@ -4,14 +4,28 @@ const StyledHero = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5rem 2rem;
-  text-align: center; /* Center text on smaller screens */
 
   .header {
-    font-size: 4rem;
-    font-weight: 600;
-    line-height: 75px;
-    color: #10041c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
     padding: 0.5rem 2rem;
+    h1{
+      font-size: 4rem;
+      font-weight: 600;
+      line-height: 75px;
+      color: #10041c;
+    }
+    span{
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 50px;
+      color: #10041c8b;
+      border-radius: 1rem;
+      padding: 0.3rem 1rem;
+      border: 2px solid #5e0fad;
+    }
   }
 
   .subheader {
@@ -32,7 +46,6 @@ const StyledHero = styled.div`
 
   .heroLinks {
     display: flex;
-    justify-content: center;
     padding: 0 2rem;
     align-items: center;
     gap: 20px;
@@ -100,7 +113,10 @@ const StyledHero = styled.div`
 const Hero = () => {
   return (
     <StyledHero>
-      <h1 className="header">Hey, I’m Udodirim</h1>
+      <div className="header">
+      <h1 >Hey, I’m Udodirim</h1>
+      <span>Available for New projects</span>
+      </div>
       <h2 className="subheader">Web Developer</h2>
       <p className="heroParagraph">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet

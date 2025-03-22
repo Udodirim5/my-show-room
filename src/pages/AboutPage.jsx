@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AnimatedCard from "../ui/AnimatedCard";
 
 const StyledAbout = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ const StyledAbout = styled.div`
     padding: 0 2rem;
     font-weight: 400;
     line-height: 27px;
-    color: #10041c;
+    color: #10041cae;
 
     @media (max-width: 768px) {
       font-size: 1rem;
@@ -60,10 +61,13 @@ const StatsGrid = styled.div`
   .stat {
     padding: 2rem 1rem;
     background: #fff;
-    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 300px;
+    border: 1px solid #10041c78;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px 0 #10041c78;
 
     h2 {
       font-size: 3rem;
@@ -102,7 +106,7 @@ const StatsGrid = styled.div`
     p {
       font-size: 1rem;
       font-weight: 400;
-      color: #10041c;
+      color: #10041c8d;
       line-height: 26px;
 
       @media (max-width: 768px) {
@@ -122,7 +126,8 @@ const ImageContainer = styled.div`
   overflow: hidden;
   margin-top: 2rem;
   padding: 2rem;
-
+  border-radius: 1rem;
+  
   img {
     width: 100%;
     height: 100%;
@@ -143,30 +148,44 @@ const ImageContainer = styled.div`
 const AboutPage = () => {
   return (
     <StyledAbout>
-      <h1 className="header">Hey, I’m Udodirim</h1>
-      <p className="aboutHeroParagraph">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-        lacus enim. Sed sit amet lacus enim. Sed sit amet lacus enim. Sed sit
-        amet lacus enim.
-      </p>
+      <AnimatedCard index={1} variant="fade">
+        <h1 className="header">Hey, I’m Udodirim</h1>
+        <p className="aboutHeroParagraph">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
+          lacus enim. Sed sit amet lacus enim. Sed sit amet lacus enim. Sed sit
+          amet lacus enim.
+        </p>
+      </AnimatedCard>
       <StatsGrid>
-        <div className="stat">
-          <h2>10+</h2>
-          <h3>Years of Experience</h3>
-          <p>Over a decade of expertise in UI/UX and product design, crafting digital experiences.</p>
-        </div>
+        <AnimatedCard index={2} variant="zoom">
+          <div className="stat">
+            <h2>10+</h2>
+            <h3>Years of Experience</h3>
+            <p>
+              Over a decade of expertise in UI/UX and product design, crafting
+              digital experiences.
+            </p>
+          </div>
+        </AnimatedCard>
 
-        <div className="stat">
-          <h2>100+</h2>
-          <h3>Projects Completed</h3>
-          <p>Over a hundred projects completed for a variety of industries and clients.</p>
-        </div>
+        <AnimatedCard index={3} variant="zoom">
+          <div className="stat">
+            <h2>100+</h2>
+            <h3>Projects Completed</h3>
+            <p>
+              Over a hundred projects completed for a variety of industries and
+              clients.
+            </p>
+          </div>
+        </AnimatedCard>
 
-        <div className="stat">
-          <h2>100%</h2>
-          <h3>Client Satisfaction</h3>
-          <p>Our clients are happy, and we are proud of our work.</p>
-        </div>
+        <AnimatedCard index={4} variant="zoom">
+          <div className="stat">
+            <h2>100%</h2>
+            <h3>Client Satisfaction</h3>
+            <p>Our clients are happy, and we are proud of our work.</p>
+          </div>
+        </AnimatedCard>
       </StatsGrid>
 
       <ImageContainer>
