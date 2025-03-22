@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import AnimatedCard from "../ui/AnimatedCard";
 
 const StyledHero = styled.div`
   display: flex;
@@ -11,13 +12,13 @@ const StyledHero = styled.div`
     align-items: center;
     gap: 20px;
     padding: 0.5rem 2rem;
-    h1{
+    h1 {
       font-size: 4rem;
       font-weight: 600;
       line-height: 75px;
       color: #10041c;
     }
-    span{
+    span {
       font-size: 1rem;
       font-weight: 600;
       line-height: 50px;
@@ -114,19 +115,30 @@ const Hero = () => {
   return (
     <StyledHero>
       <div className="header">
-      <h1 >Hey, I’m Udodirim</h1>
-      <span>Available for New projects</span>
+        <AnimatedCard index={1} variant="fade">
+          <h1>Hey, I’m Udodirim</h1>
+        </AnimatedCard>
+
+        <AnimatedCard index={3} variant="fade">
+          <span>Available for New projects</span>
+        </AnimatedCard>
       </div>
-      <h2 className="subheader">Web Developer</h2>
-      <p className="heroParagraph">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-        lacus enim. Sed sit amet lacus enim. Sed sit amet lacus enim. Sed sit
-        amet lacus enim.
-      </p>
-      <div className="heroLinks">
-        <a href="">About Me</a>
-        <a href="">Explore Works</a>
-      </div>
+      <AnimatedCard index={2} variant="fade">
+        <h2 className="subheader">Web Developer</h2>
+      </AnimatedCard>
+      <AnimatedCard index={4} variant="fade">
+        <p className="heroParagraph">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
+          lacus enim. Sed sit amet lacus enim. Sed sit amet lacus enim. Sed sit
+          amet lacus enim.
+        </p>
+      </AnimatedCard>
+      <AnimatedCard index={5} variant="fade">
+        <div className="heroLinks">
+          <a href="">About Me</a>
+          <a href="">Explore Works</a>
+        </div>
+      </AnimatedCard>
     </StyledHero>
   );
 };
