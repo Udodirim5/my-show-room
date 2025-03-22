@@ -108,6 +108,8 @@ const StyledFooter = styled.footer`
 `;
 
 const Footer = () => {
+  const { email, location, phone, socialLinks } = personalInfo;
+
   const socialIcons = {
     LinkedIn: SiLinkedin,
     Github: SiGithub,
@@ -146,15 +148,15 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Contact Info</h3>
           <ul>
-            <li>Email: hello@example.com</li>
-            <li>Phone: +123 456 7890</li>
-            <li>Address: 123 Creative St, Imagination City</li>
+            <li>Email: {email}</li>
+            <li>Phone: {phone}</li>
+            <li>Address: {location}</li>
           </ul>
         </div>
       </div>
 
       <div className="social-icons">
-        {personalInfo.socialLinks.map(({ name, url }) => {
+        {socialLinks.map(({ name, url }) => {
           const Icon = socialIcons[name];
           return (
             Icon && (

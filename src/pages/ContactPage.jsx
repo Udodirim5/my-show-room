@@ -7,14 +7,14 @@ import {
 } from "react-icons/fa";
 import {
   SiLinkedin,
-  SiBehance,
-  SiDribbble,
-  SiInstagram,
+  SiGithub,
   SiX,
-  SiFigma,
+  SiInstagram,
+  SiYoutube,
 } from "react-icons/si";
 
 import Button from "../ui/Button";
+import { personalInfo } from "../../data/data";
 
 const ContactContainer = styled.div`
   max-width: 120rem;
@@ -299,6 +299,8 @@ const ContactLinks = styled.div`
 `;
 
 const ContactPage = () => {
+  const { email, location, phone, socialLinks } = personalInfo;
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -310,6 +312,14 @@ const ContactPage = () => {
     console.log(e.target.elements);
     alert("Form submitted successfully!");
     e.target.reset();
+  };
+
+  const socialIcons = {
+    LinkedIn: SiLinkedin,
+    Github: SiGithub,
+    Twitter: SiX, // Twitter is now "X"
+    Instagram: SiInstagram,
+    youtube: SiYoutube,
   };
 
   return (
@@ -347,7 +357,7 @@ const ContactPage = () => {
               <FaEnvelope className="icon" />
               <strong>Email</strong>
             </div>
-            <a href="mailto:udoodiriwisdom@gmail.com">udoodiriwisdom@gmail.com</a>
+            <a href={`mailto:${email}`}>{email}</a>
           </div>
 
           <div className="contactItem">
@@ -355,45 +365,45 @@ const ContactPage = () => {
               <FaComments className="icon" />
               <strong>Get support</strong>
             </div>
-            <a href="#">Let's Chat with us</a>
+            <a href={`https//:wa.me/${phone}`}>Chat with us</a>
           </div>
           <div className="contactItem">
             <div>
               <FaMapMarkerAlt className="icon" />
               <strong>Visit my office</strong>
             </div>
-            <span>18 Metro DG, California, USA</span>
+            <span>{location}</span>
           </div>
           <div className="contactItem">
             <div>
               <FaPhoneAlt className="icon" />
               <strong>Schedule a meeting</strong>
             </div>
-            <a href="#">Book here</a>
+            <a href={`tel:${phone}`} aria-label="Phone number">
+              Book here
+            </a>
           </div>
         </div>
 
         <div className="socialLinks">
-          <strong>Follow me</strong>
+          <strong>Check me on</strong>
           <div className="socialIcons">
-            <a href="#">
-              <SiLinkedin className="socialIcon" />
-            </a>
-            <a href="#">
-              <SiBehance className="socialIcon" />
-            </a>
-            <a href="#">
-              <SiDribbble className="socialIcon" />
-            </a>
-            <a href="#">
-              <SiInstagram className="socialIcon" />
-            </a>
-            <a href="#">
-              <SiX className="socialIcon" />
-            </a>
-            <a href="#">
-              <SiFigma className="socialIcon" />
-            </a>
+            {socialLinks.map(({ name, url }) => {
+              const Icon = socialIcons[name];
+              return (
+                Icon && (
+                  <a
+                    key={name}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={name}
+                  >
+                    <Icon className="socialIcon" />
+                  </a>
+                )
+              );
+            })}
           </div>
         </div>
       </ContactLinks>

@@ -56,8 +56,8 @@ export const personalInfo = {
   name: "Udodirim Nnodimele",
   // role: "UI/UX Designer",
   email: "udodirimwisdom@gmail.com",
-  location: "Lagos, Nigeria",
-  phone: "+234 816 943 5062",
+  location: "Owerri, Imo State, Nigeria",
+  phone: "+2349033951020",
   socialLinks: [
     {
       name: "LinkedIn",
@@ -65,15 +65,15 @@ export const personalInfo = {
     },
     {
       name: "Github",
-      url: "https://github.com/Udodirim",
+      url: "https://github.com/Udodirim5",
     },
     {
       name: "Twitter",
-      url: "https://twitter.com/UdodirimW",
+      url: "https://twitter.com/Udodirim101",
     },
     {
       name: "Instagram",
-      url: "https://www.instagram.com/udodirimwisdom/",
+      url: "https://www.instagram.com/udodirim101/",
     },
     {
       name: "youtube",
