@@ -1,0 +1,25 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500&display=swap');
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+}
+
+body {
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 500;
+    color: rgb(16, 4, 28);
+    font-size: 24px;
+    line-height: 32px;
+    background: linear-gradient(to bottom right, #f3f5f7, #f9f9f9);
+}
