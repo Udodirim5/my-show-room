@@ -160,8 +160,8 @@ const LatestProjects = () => {
         </div>
       </AnimatedCard>
       <LatestHeadParagraph>
-        From concept to reality—explore how we're bringing groundbreaking ideas
-        to life.
+        From concept to reality—explore how we&apos;re bringing groundbreaking
+        ideas to life.
       </LatestHeadParagraph>
 
       <LatestProjectsContainer>

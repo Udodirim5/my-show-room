@@ -10,7 +10,7 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 16px;
+  font-size: ${({ fontSize }) => fontSize || "1rem"}; /* Default: 1rem */
   font-weight: bold;
   transition: background-color 0.3s ease;
 
@@ -41,6 +41,7 @@ const Button = ({
   onClick,
   type,
   icon,
+  fontSize,
   disabled = false,
   backgroundColor,
   color,
@@ -53,6 +54,7 @@ const Button = ({
       onClick={disabled ? undefined : onClick} // Prevent clicks if disabled
       disabled={disabled}
       color={color}
+      fontSize={fontSize}
       {...props}
     >
       {icon && <span>{icon}</span>}
