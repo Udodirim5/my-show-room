@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FiEdit, FiTrash } from "react-icons/fi";
 import { blogPosts } from "../../data/data";
 import AddProject from "../features/project/AddProduct";
 import BlogRow from "../features/post/BlogRow";

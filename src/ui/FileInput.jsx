@@ -11,17 +11,17 @@ const FileInput = styled.input.attrs({ type: "file" })`
     margin-right: 1.2rem;
     border-radius: 1rem;
     border: none;
-    background: ${({ theme }) => theme.text};
-    color: ${({ theme }) => theme.background};
+    background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.text} !important;
+    -webkit-text-fill-color: ${({ theme }) => theme.background} !important;
     cursor: pointer;
     transition: color 0.2s, background-color 0.2s;
-
-    &:hover {
-      background: ${({ theme }) => theme.background};
-      color: ${({ theme }) => theme.text};
-      border: 2px solid ${({ theme }) => theme.text};
-    }
+    border: 2px solid ${({ theme }) => theme.text};
+    
   }
 `;
 
+
+
 export default FileInput;
+

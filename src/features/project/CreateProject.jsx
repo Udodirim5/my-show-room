@@ -7,32 +7,6 @@ import { useUpdateProject } from "../../mutationsAndFn/project/useUpdateProject"
 import { useCreateProject } from "../../mutationsAndFn/project/useCreate";
 import { useForm } from "react-hook-form";
 
-const CreateProjectForm = styled.form`
-  margin: 2rem auto;
-  padding: 2rem 1.5rem;
-  border-radius: 10px;
-  background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
-
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 1rem;
-  }
-`;
-
-const Flex = styled.div`
-  display: flex;
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 15px;
-  }
-`;
-
 const CreateProject = ({ projectToEdit, onCloseModal }) => {
   const { id: editId, ...editValues } = projectToEdit || {};
 
@@ -45,12 +19,18 @@ const CreateProject = ({ projectToEdit, onCloseModal }) => {
   const { errors } = formState;
 
   const handleSubmitFn = (data) => {
+    console.log("Form Data:", data);
+
+    if (!data) {
+      console.error("Form data is undefined!");
+      return;
+    }
     const image =
       typeof data.image === "string" ? data.image : data.image?.[0] || null;
 
     if (isEditSession) {
       updateProject(
-        { newCabinData: { ...data, image }, id: editId },
+        { newData: { ...data, image }, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -80,24 +60,60 @@ const CreateProject = ({ projectToEdit, onCloseModal }) => {
   return (
     <div>
       <CreateProjectForm onSubmit={handleSubmit(handleSubmitFn, onErrorFn)}>
-          <FormRow label="Project's title" htmlFor="title" errors={errors?.title?.message}>
-            <Input type="text" id="title" disabled={isProcessing}
-            {...register("title", { required: "Project's title is required" })} />
-          </FormRow>
-
-          <FormRow label="Live URL" htmlFor="link" errors={errors?.link?.message}>
-            <Input type="url" id="link" disabled={isProcessing}
-            {...register("link", { required: "Project's live URL is required" })} />
-          </FormRow>
-
-        <FormRow label="GitHub URL" htmlFor="github" errors={errors?.github?.message}>
-          <Input type="url" id="github" disabled={isProcessing}
-          {...register("github", { required: " GitHub URL is required" })} />
+        <FormRow
+          label="Project's title"
+          htmlFor="title"
+          errors={errors?.title?.message}
+        >
+          <Input
+            type="text"
+            id="title"
+            disabled={isProcessing}
+            {...register("title", { required: "Project's title is required" })}
+          />
         </FormRow>
-        
 
-        <FormRow label="Project photo" htmlFor="image" errors={errors?.image?.message} >
-          <FileInput disabled={isProcessing} id="image" accept="image/*" {...register("image", { required: isEditSession ? false : "Image is required", })} />
+        <FormRow
+          label="Live URL"
+          htmlFor="liveUrl"
+          errors={errors?.liveUrl?.message}
+        >
+          <Input
+            type="url"
+            id="liveUrl"
+            disabled={isProcessing}
+            {...register("liveUrl", {
+              required: "Project's live URL is required",
+            })}
+          />
+        </FormRow>
+
+        <FormRow
+          label="GitHub URL"
+          htmlFor="gitHubUrl"
+          errors={errors?.gitHubUrl?.message}
+        >
+          <Input
+            type="url"
+            id="gitHubUrl"
+            disabled={isProcessing}
+            {...register("gitHubUrl", { required: " GitHub URL is required" })}
+          />
+        </FormRow>
+
+        <FormRow
+          label="Project photo"
+          htmlFor="image"
+          errors={errors?.image?.message}
+        >
+          <FileInput
+            disabled={isProcessing}
+            id="image"
+            accept="image/*"
+            {...register("image", {
+              required: isEditSession ? false : "Image is required",
+            })}
+          />
         </FormRow>
 
         <Flex>
@@ -106,14 +122,14 @@ const CreateProject = ({ projectToEdit, onCloseModal }) => {
             backgroundColor="#10041c"
             type="submit"
           >
-            Submit
+            {isEditSession ? "Edit project" : "Create new project"}
           </Button>
           <Button
             disabled={isProcessing}
-            onClick={onCloseModal}
+            onClick={() => onCloseModal?.()}
             color="#10041c"
             backgroundColor="#fff"
-            type="button"
+            type="reset"
           >
             Cancel
           </Button>
@@ -124,3 +140,29 @@ const CreateProject = ({ projectToEdit, onCloseModal }) => {
 };
 
 export default CreateProject;
+
+const CreateProjectForm = styled.form`
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.text};
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
+`;
+
+const Flex = styled.div`
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+  }
+`;

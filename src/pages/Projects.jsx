@@ -1,7 +1,59 @@
 import styled from "styled-components";
-import { projects } from "../../data/data";
 import AnimatedCard from "../ui/AnimatedCard";
 import Button from "../ui/Button";
+import { useProjects } from "../mutationsAndFn/project/useProject";
+import Loader from "../ui/Loader";
+import { formatDate } from "../utils/helper";
+
+
+const Projects = () => {
+
+  const { isLoading, projects } = useProjects()
+  
+  if(isLoading) return <Loader />
+
+
+  return (
+    <ProjectsSection>
+      <AnimatedCard index={0} variant="fade">
+        <div className="latestHead">
+          <h2>Recent Projects</h2>
+        </div>
+      </AnimatedCard>
+      <ProjectsHeadParagraph>
+        A closer look at my newest ventures, where creativity meets precision.
+      </ProjectsHeadParagraph>
+
+      <AllProjectsContainer>
+        {projects.map((project, index) => (
+          <AnimatedCard key={project.id} index={index} className="projectCard">
+            <div className="imgContainer">
+              <img src={project.image} alt={project.title} />
+            </div>
+            <div className="cardHead">
+              <h3>{project.title}</h3>
+              <date>{formatDate(project.created_at)}</date>
+            </div>
+            <div className="cardUlr">
+              <a href={project.gitHubUrl}>GitHub</a>
+              <a href={project.liveUrl}>Live Demo</a>
+            </div>
+          </AnimatedCard>
+        ))}
+      </AllProjectsContainer>
+
+      {projects.length > 8 && (
+        <LoadMore>
+          <Button backgroundColor="#10041c" type="button">
+            Load more
+          </Button>
+        </LoadMore>
+      )}
+    </ProjectsSection>
+  );
+};
+
+export default Projects;
 
 const ProjectsSection = styled.section`
   background: #f9f9f9;
@@ -163,46 +215,3 @@ const LoadMore = styled.div`
   align-items: center;
   margin-top: 2rem;
 `;
-
-const Projects = () => {
-  return (
-    <ProjectsSection>
-      <AnimatedCard index={0} variant="fade">
-        <div className="latestHead">
-          <h2>Recent Projects</h2>
-        </div>
-      </AnimatedCard>
-      <ProjectsHeadParagraph>
-        A closer look at my newest ventures, where creativity meets precision.
-      </ProjectsHeadParagraph>
-
-      <AllProjectsContainer>
-        {projects.map((project, index) => (
-          <AnimatedCard key={project.id} index={index} className="projectCard">
-            <div className="imgContainer">
-              <img src={project.ImageUrl} alt={project.title} />
-            </div>
-            <div className="cardHead">
-              <h3>{project.title}</h3>
-              <date>{project.year}</date>
-            </div>
-            <div className="cardUlr">
-              <a href={project.github}>GitHub</a>
-              <a href={project.link}>Live Demo</a>
-            </div>
-          </AnimatedCard>
-        ))}
-      </AllProjectsContainer>
-
-      {projects.length > 8 && (
-        <LoadMore>
-          <Button backgroundColor="#10041c" type="button">
-            Load more
-          </Button>
-        </LoadMore>
-      )}
-    </ProjectsSection>
-  );
-};
-
-export default Projects;

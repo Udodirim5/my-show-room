@@ -1,5 +1,31 @@
 import styled from "styled-components";
-import { blogPosts, projects } from "../../data/data";
+import { blogPosts } from "../../data/data";
+import { useProjects } from "../mutationsAndFn/project/useProject";
+
+const Dashboard = () => {
+    const { isLoading, projects } = useProjects()
+  
+  return (
+    <Container>
+      <MainContent>
+        <Card>
+          <h2>Total Blog Posts</h2>
+          <p>{blogPosts.length}</p>
+        </Card>
+        <Card>
+          <h2>Total Projects</h2>
+          <p>{isLoading ? "Loading..." : projects.length}</p>
+        </Card>
+        <Card>
+          <h2>Recent Updates</h2>
+          <p>Last update: 2 days ago</p>
+        </Card>
+      </MainContent>
+    </Container>
+  );
+};
+
+export default Dashboard;
 
 const Container = styled.div`
   display: flex;
@@ -28,26 +54,3 @@ const Card = styled.div`
     margin-bottom: 10px;
   }
 `;
-
-const Dashboard = () => {
-  return (
-    <Container>
-      <MainContent>
-        <Card>
-          <h2>Total Blog Posts</h2>
-          <p>{blogPosts.length}</p>
-        </Card>
-        <Card>
-          <h2>Total Projects</h2>
-          <p>{projects.length}</p>
-        </Card>
-        <Card>
-          <h2>Recent Updates</h2>
-          <p>Last update: 2 days ago</p>
-        </Card>
-      </MainContent>
-    </Container>
-  );
-};
-
-export default Dashboard;

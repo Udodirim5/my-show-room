@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { projects } from "../../data/data";
-import Button from "../ui/Button";
 import ProjectRow from "../features/project/ProjectRow";
+import { useProjects } from "../mutationsAndFn/project/useProject";
+import Loader from "../ui/Loader";
+import AddProject from "../features/project/AddProduct";
 
 const ProjectTable = () => {
+  const { isLoading, projects } = useProjects()
+
+  if(isLoading) return <Loader />
 
   return (
     <TableContainer>
@@ -25,7 +29,7 @@ const ProjectTable = () => {
       </Table>
 
       <AddNewProject>
-        <Button fontSize="1.5rem">Add New Project</Button>
+      <AddProject />
       </AddNewProject>
     </TableContainer>
   );

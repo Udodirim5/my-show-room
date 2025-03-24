@@ -4,6 +4,53 @@ import AnimatedCard from "../ui/AnimatedCard";
 import Button from "../ui/Button";
 import { Link } from "react-router-dom";
 
+
+const BlogPage = () => {
+  
+  return (
+    <BlogSection>
+      <AnimatedCard index={0} variant="fade">
+        <div className="latestHead">
+          <h2>Exploring Design Trends</h2>
+        </div>
+      </AnimatedCard>
+      <BlogHeadParagraph>
+        Exploring design trends, sharing lessons, and offering a peek behind the
+        scenes.
+      </BlogHeadParagraph>
+
+      <AllBlogContainer>
+        {blogPosts.map((blog, index) => (
+          <AnimatedCard key={blog.id} index={index} className="blogCard">
+            <Link to={`/blog/${blog.id}`}>
+              {/* Keep the link inside the card */}
+              <div className="imgContainer">
+                <img src={blog.coverImage} alt={blog.title} />
+              </div>
+              <div className="cardHead">
+                <h3>{blog.title}</h3>
+                <date className="date">{blog.createdAt}</date>
+              </div>
+              <p className="excerpt">{blog.excerpt}</p>
+            </Link>
+          </AnimatedCard>
+        ))}
+      </AllBlogContainer>
+
+      {blogPosts.length > 8 && (
+        <LoadMore>
+          <Button backgroundColor="#10041c" type="button">
+            Load more
+          </Button>
+        </LoadMore>
+      )}
+    </BlogSection>
+  );
+};
+
+export default BlogPage;
+
+
 const BlogSection = styled.section`
   background: #f9f9f9;
   padding: 4rem 2rem;
@@ -157,47 +204,3 @@ const LoadMore = styled.div`
   align-items: center;
   margin-top: 2rem;
 `;
-
-const BlogPage = () => {
-  return (
-    <BlogSection>
-      <AnimatedCard index={0} variant="fade">
-        <div className="latestHead">
-          <h2>Exploring Design Trends</h2>
-        </div>
-      </AnimatedCard>
-      <BlogHeadParagraph>
-        Exploring design trends, sharing lessons, and offering a peek behind the
-        scenes.
-      </BlogHeadParagraph>
-
-      <AllBlogContainer>
-        {blogPosts.map((blog, index) => (
-          <AnimatedCard key={blog.id} index={index} className="blogCard">
-            <Link to={`/blog/${blog.id}`}>
-              {/* Keep the link inside the card */}
-              <div className="imgContainer">
-                <img src={blog.coverImage} alt={blog.title} />
-              </div>
-              <div className="cardHead">
-                <h3>{blog.title}</h3>
-                <date className="date">{blog.createdAt}</date>
-              </div>
-              <p className="excerpt">{blog.excerpt}</p>
-            </Link>
-          </AnimatedCard>
-        ))}
-      </AllBlogContainer>
-
-      {blogPosts.length > 8 && (
-        <LoadMore>
-          <Button backgroundColor="#10041c" type="button">
-            Load more
-          </Button>
-        </LoadMore>
-      )}
-    </BlogSection>
-  );
-};
-
-export default BlogPage;

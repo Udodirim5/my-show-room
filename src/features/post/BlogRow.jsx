@@ -2,9 +2,14 @@ import { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import styled from "styled-components";
 import CreateProject from "../project/CreateProject";
+import Modal from "../../ui/Modal";
 
 const BlogRow = ({ post }) => {
-  const [showForm, setShowForm] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const handleShowForm = () => {
+    setIsOpenModal(true);
+  };
 
   return (
     <>
@@ -13,10 +18,17 @@ const BlogRow = ({ post }) => {
         {post.title.length > 50 ? post.title.slice(0, 50) + "..." : post.title}
       </Td>
       <TdActions>
-        <FiEdit onClick={() => setShowForm((show) => !show)} />
-        <FiTrash  />
+        <FiEdit onClick={handleShowForm} />
+        <FiTrash />
       </TdActions>
-      {showForm && <CreateProject projectToEdit={post} />}
+      {isOpenModal && (
+        <Modal onClose={() => setIsOpenModal(false)}>
+          <CreateProject
+            projectToEdit={post}
+            onCloseModal={() => setIsOpenModal(false)}
+          />
+        </Modal>
+      )}
     </>
   );
 };
