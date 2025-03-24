@@ -11,23 +11,21 @@ const BlogSingleContainer = styled.div`
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(145deg, #f9f9f9, #e0e0e0);
+  background: ${({ theme }) => theme.background};
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-
+  box-shadow: 0 4px 15px ${({ theme }) => theme.liteShadow};
   @media screen and (max-width: 768px) {
     padding: 0.5rem;
   }
-
-`;
+  
+  `;
 
 // Styled component for the main post content
 const SinglePostContainer = styled(motion.div)`
-  background: white;
+  background: ${({ theme }) => theme.cardBackground};
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px ${({ theme }) => theme.liteShadow};
 
   &:hover {
     transform: translateY(-5px);
@@ -40,7 +38,6 @@ const SinglePostContainer = styled(motion.div)`
 
   h1 {
     font-size: 2.5rem;
-    color: #333;
     margin-bottom: 1rem;
 
     @media (max-width: 768px) {
@@ -57,7 +54,6 @@ const SinglePostContainer = styled(motion.div)`
   p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: #555;
   }
   h2 {
     margin: 1.5rem 0 1rem;
@@ -67,7 +63,7 @@ const SinglePostContainer = styled(motion.div)`
   }
 
   pre {
-    background: #f5f5f5;
+    background: ${({ theme }) => theme.inputBackground};
     padding: 1rem;
     border-radius: 5px;
     overflow-x: auto;
@@ -87,27 +83,25 @@ const SinglePostContainer = styled(motion.div)`
     li {
       margin-bottom: 0.5rem;
       font-size: 1.1rem;
-      color: #555;
     }
   }
 `;
 
 // Styled component for the related posts section
 const RelatedPosts = styled(motion.aside)`
-  background: white;
+  background: ${({ theme }) => theme.background};
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px ${({ theme }) => theme.liteShadow};
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 20px ${({ theme }) => theme.liteShadow};
   }
 
   h2 {
     font-size: 2rem;
-    color: #333;
     margin-bottom: 1rem;
   }
 
@@ -118,7 +112,6 @@ const RelatedPosts = styled(motion.aside)`
     li {
       margin-bottom: 1rem;
       font-size: 1.1rem;
-      color: #555;
       transition: color 0.3s ease;
 
       &:hover {
