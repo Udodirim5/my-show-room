@@ -25,10 +25,10 @@ const Main = styled.main`
   }
 `;
 
-const AppLayout = () => {
+const AppLayout = ({isDarkMode, setIsDarkMode}) => {
   return (
     <Layout>
-      <Header />
+      <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       <Main>
         <Outlet />
       </Main>

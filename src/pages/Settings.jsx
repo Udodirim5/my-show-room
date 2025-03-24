@@ -1,24 +1,29 @@
 import styled from "styled-components";
 import { useState, useRef } from "react";
-import { FiUpload, FiUser, FiEdit2, FiSave, FiLock, FiMail, FiGlobe, FiSun, FiMoon } from "react-icons/fi";
+import {
+  FiUpload,
+  FiUser,
+  FiEdit2,
+  FiSave,
+  FiLock,
+  FiMail,
+  FiGlobe,
+  FiSun,
+  FiMoon,
+} from "react-icons/fi";
+import { personalInfo } from "../../data/data";
 
-const Settings = ({isDarkMode, setIsDarkMode}) => {
-  const [formData, setFormData] = useState({
-    name: "Alex Johnson",
-    title: "Frontend Developer",
-    bio: "Passionate about creating beautiful, user-friendly interfaces with React and TypeScript.",
-    email: "alex@example.com",
-    website: "https://alexjohnson.dev",
-    password: "",
-    newPassword: "",
-  });
+const Settings = ({ isDarkMode, setIsDarkMode }) => {
+  const [formData, setFormData] = useState(personalInfo);
   const [profileImage, setProfileImage] = useState(null);
-  const [previewImage, setPreviewImage] = useState("https://randomuser.me/api/portraits/men/32.jpg");
+  const [previewImage, setPreviewImage] = useState(
+    "https://randomuser.me/api/portraits/men/99.jpg"
+  );
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleImageChange = (e) => {
@@ -46,131 +51,143 @@ const Settings = ({isDarkMode, setIsDarkMode}) => {
 
   return (
     <>
-    <SettingsContainer>
-      <SettingsHeader>
-        <h2>Profile Settings</h2>
-        <p>Update your personal information and preferences</p>
-      </SettingsHeader>
-      
-      <SettingsForm onSubmit={handleSubmit}>
-        <ProfileImageSection>
-          <ImagePreview>
-            <img src={previewImage} alt="Profile preview" />
-            <ImageOverlay onClick={() => fileInputRef.current.click()}>
-              <FiUpload size={24} />
-              <span>Change Photo</span>
-            </ImageOverlay>
-          </ImagePreview>
-          <input 
-            type="file" 
-            ref={fileInputRef}
-            onChange={handleImageChange}
-            accept="image/*"
-            style={{ display: 'none' }}
-          />
-          <ImageTips>
-            <p>• Use a high-quality image</p>
-            <p>• Recommended size: 400x400px</p>
-            <p>• Formats: JPG, PNG, or GIF</p>
-          </ImageTips>
-        </ProfileImageSection>
-        
-        <FormSection>
-          <FormGroup>
-            <label><FiUser /> Display Name</label>
-            <input 
-              type="text" 
-              name="name" 
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Your name"
+      <SettingsContainer>
+        <SettingsHeader>
+          <h2>Profile Settings</h2>
+          <p>Update your personal information and preferences</p>
+        </SettingsHeader>
+
+        <SettingsForm onSubmit={handleSubmit}>
+          <ProfileImageSection>
+            <ImagePreview>
+              <img src={previewImage} alt="Profile preview" />
+              <ImageOverlay onClick={() => fileInputRef.current.click()}>
+                <FiUpload size={24} />
+                <span>Change Photo</span>
+              </ImageOverlay>
+            </ImagePreview>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+              accept="image/*"
+              style={{ display: "none" }}
             />
-          </FormGroup>
-          
-          <FormGroup>
-            <label><FiEdit2 /> Professional Title</label>
-            <input 
-              type="text" 
-              name="title" 
-              value={formData.title}
-              onChange={handleChange}
-              placeholder="Your professional title"
-            />
-          </FormGroup>
-          
-          <FormGroup>
-            <label><FiEdit2 /> Bio</label>
-            <textarea 
-              name="bio" 
-              value={formData.bio}
-              onChange={handleChange}
-              placeholder="Tell people about yourself"
-              rows="4"
+            <ImageTips>
+              <p>• Use a high-quality image</p>
+              <p>• Recommended size: 400x400px</p>
+              <p>• Formats: JPG, PNG, or GIF</p>
+            </ImageTips>
+          </ProfileImageSection>
+
+          <FormSection>
+            <FormGroup>
+              <label>
+                <FiUser /> Display Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your name"
               />
-          </FormGroup>
+            </FormGroup>
 
-        </FormSection>
-        
-        <FormSection>
-          <SectionTitle>Contact Information</SectionTitle>
-          <FormGroup>
-            <label><FiMail /> Email</label>
-            <input 
-              type="email" 
-              name="email" 
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Your email address"
-            />
-          </FormGroup>
-          
-          <FormGroup>
-            <label><FiGlobe /> Website</label>
-            <input 
-              type="url" 
-              name="website" 
-              value={formData.website}
-              onChange={handleChange}
-              placeholder="Your personal website"
-            />
-          </FormGroup>
-        </FormSection>
-        
-        <FormSection>
-          <SectionTitle>Security</SectionTitle>
-          <FormGroup>
-            <label><FiLock /> Current Password</label>
-            <input 
-              type="password" 
-              name="password" 
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter current password"
-            />
-          </FormGroup>
-          
-          <FormGroup>
-            <label><FiLock /> New Password</label>
-            <input 
-              type="password" 
-              name="newPassword" 
-              value={formData.newPassword}
-              onChange={handleChange}
-              placeholder="Enter new password"
-            />
-          </FormGroup>
-        </FormSection>
-        
-        <SaveButton type="submit">
-          <FiSave /> Save Changes
-        </SaveButton>
-      </SettingsForm>
-    </SettingsContainer>
+            <FormGroup>
+              <label>
+                <FiEdit2 /> Professional Title
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Your professional title"
+              />
+            </FormGroup>
 
-          <ThemeToggle onClick={toggleTheme}>
-            {isDarkMode ? <FiSun /> : <FiMoon />}
-          </ThemeToggle>
+            <FormGroup>
+              <label>
+                <FiEdit2 /> Bio
+              </label>
+              <textarea
+                name="bio"
+                value={formData.bio}
+                onChange={handleChange}
+                placeholder="Tell people about yourself"
+                rows="4"
+              />
+            </FormGroup>
+          </FormSection>
 
+          <FormSection>
+            <SectionTitle>Contact Information</SectionTitle>
+            <FormGroup>
+              <label>
+                <FiMail /> Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your email address"
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <label>
+                <FiGlobe /> Website
+              </label>
+              <input
+                type="url"
+                name="website"
+                value={formData.website}
+                onChange={handleChange}
+                placeholder="Your personal website"
+              />
+            </FormGroup>
+          </FormSection>
+
+          <FormSection>
+            <SectionTitle>Security</SectionTitle>
+            <FormGroup>
+              <label>
+                <FiLock /> Current Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter current password"
+              />
+            </FormGroup>
+
+            <FormGroup>
+              <label>
+                <FiLock /> New Password
+              </label>
+              <input
+                type="password"
+                name="newPassword"
+                value={formData.newPassword}
+                onChange={handleChange}
+                placeholder="Enter new password"
+              />
+            </FormGroup>
+          </FormSection>
+
+          <SaveButton type="submit">
+            <FiSave /> Save Changes
+          </SaveButton>
+        </SettingsForm>
+      </SettingsContainer>
+
+      <ThemeToggle onClick={toggleTheme}>
+        {isDarkMode ? <FiSun /> : <FiMoon />}
+      </ThemeToggle>
     </>
   );
 };
@@ -189,13 +206,13 @@ const SettingsContainer = styled.div`
 
 const SettingsHeader = styled.div`
   margin-bottom: 2rem;
-  
+
   h2 {
     font-size: 1.8rem;
     color: ${({ theme }) => theme.primaryText};
     margin-bottom: 0.5rem;
   }
-  
+
   p {
     color: ${({ theme }) => theme.secondaryText};
     font-size: 0.95rem;
@@ -223,13 +240,13 @@ const ImagePreview = styled.div`
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   &:hover {
     transform: scale(1.05);
   }
@@ -249,11 +266,11 @@ const ImageOverlay = styled.div`
   color: white;
   opacity: 0;
   transition: opacity 0.3s ease;
-  
+
   ${ImagePreview}:hover & {
     opacity: 1;
   }
-  
+
   svg {
     margin-bottom: 0.5rem;
   }
@@ -284,7 +301,7 @@ const SectionTitle = styled.h3`
 
 const FormGroup = styled.div`
   margin-bottom: 1.5rem;
-  
+
   label {
     display: flex;
     align-items: center;
@@ -294,8 +311,9 @@ const FormGroup = styled.div`
     margin-bottom: 0.5rem;
     font-weight: 500;
   }
-  
-  input, textarea {
+
+  input,
+  textarea {
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid ${({ theme }) => theme.borderColor};
@@ -304,14 +322,14 @@ const FormGroup = styled.div`
     background: ${({ theme }) => theme.inputBg};
     color: ${({ theme }) => theme.primaryText};
     transition: border-color 0.3s ease;
-    
+
     &:focus {
       outline: none;
       border-color: ${({ theme }) => theme.primary};
-      box-shadow: 0 0 0 2px ${({ theme }) => theme.primary + '20'};
+      box-shadow: 0 0 0 2px ${({ theme }) => theme.primary + "20"};
     }
   }
-  
+
   textarea {
     resize: vertical;
     min-height: 100px;
@@ -322,10 +340,8 @@ const SaveButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  background: ${({ theme }) => theme.text};
-  color: white;
   border: none;
+  gap: 0.5rem;
   padding: 0.9rem 1.5rem;
   border-radius: 8px;
   font-size: 1rem;
@@ -335,18 +351,19 @@ const SaveButton = styled.button`
   margin-top: 1rem;
   position: relative;
   overflow: hidden;
+  color: ${({ theme }) => theme.buttonText};
+  background: ${({ theme }) => theme.text};
 
-  
   &:hover {
-    background: ${({ theme }) => theme.primaryDark};
+    background: ${({ theme }) => theme.background};
     transform: translateY(-2px);
   }
-  
+
   &:active {
     transform: translateY(0);
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -50%;
     left: -50%;
@@ -354,9 +371,9 @@ const SaveButton = styled.button`
     height: 200%;
     background: linear-gradient(
       to bottom right,
-      rgba(255,255,255,0) 45%,
-      rgba(255,255,255,0.8) 50%,
-      rgba(255,255,255,0) 55%
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 55%
     );
     transform: translateX(-100%) rotate(15deg);
   }
@@ -370,7 +387,6 @@ const SaveButton = styled.button`
       transform: translateX(100%) rotate(15deg);
     }
   }
-
 `;
 
 const ThemeToggle = styled.button`
@@ -380,8 +396,8 @@ const ThemeToggle = styled.button`
   font-size: 20px;
   color: ${({ theme }) => theme.text};
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.3rem;
+  right: 1.3rem;
 
   @media screen and (min-width: 768px) {
     display: none;

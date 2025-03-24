@@ -3,23 +3,33 @@
 export const lightTheme = {
   background: "linear-gradient(to bottom right, #f3f5f7, #f9f9f9)",
   text: "#10041c",
+  paleText: "#10041c60",
   shadow: "#000000",
   liteShadow: "#00000078",
   border: "#000000",
-  hover: "#000000",
-  active: "#000000",
-  paleText: "#10041c60",
-  pale: "#f3f5f7",
+
+  // New additions
+  cardBackground: "#ffffff", // Light background for cards
+  buttonBackground: "#10041c", // Dark buttons for contrast
+  buttonText: "#ffffff", // White text on buttons
+  inputBackground: "#ffffff", // White input fields
+  inputText: "#10041c", // Dark text for readability
+  hoverEffect: "#10041c20", // Light hover effect
 };
 
 export const darkTheme = {
   background: "linear-gradient(to bottom right, #1a1a2e, #16213e)",
   text: "#ffffff",
+  paleText: "#ffffff60",
   shadow: "#000000",
   liteShadow: "#00000078",
   border: "#000000",
-  hover: "#000000",
-  active: "#000000",
-  paleText: "#ffffff60",
-  pale: "#1a1a2e",
+
+  // New additions
+  cardBackground: "#0f0f1f", // Dark background for cards
+  buttonBackground: "#ffffff", // White buttons for contrast
+  buttonText: "#10041c", // Dark text on buttons
+  inputBackground: "#1a1a2e", // Dark input fields
+  inputText: "#ffffff", // White text for readability
+  hoverEffect: "#ffffff20", // Light hover effect
 };

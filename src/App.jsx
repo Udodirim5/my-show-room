@@ -36,7 +36,14 @@ const App = () => {
         <BrowserRouter>
           <GlobalStyle />
           <Routes>
-            <Route element={<AppLayout />}>
+            <Route
+              element={
+                <AppLayout
+                  isDarkMode={isDarkMode}
+                  setIsDarkMode={setIsDarkMode}
+                />
+              }
+            >
               <Route index element={<HomePage />} />
               <Route path="/" element={<HomePage />} />
               <Route path="projects" element={<Projects />} />
@@ -55,13 +62,10 @@ const App = () => {
             >
               <Route index element={<Dashboard />} />
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="dashboard/admin/posts" element={<BlogTable />} />
+              <Route path="/admin/posts" element={<BlogTable />} />
+              <Route path="/admin/project" element={<ProjectTable />} />
               <Route
-                path="dashboard/admin/project"
-                element={<ProjectTable />}
-              />
-              <Route
-                path="dashboard/admin/settings"
+                path="/admin/settings"
                 element={
                   <Settings
                     isDarkMode={isDarkMode}

@@ -1,10 +1,70 @@
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FiMenu, FiX } from "react-icons/fi"; // Icons for the menu
+import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi"; // Icons for the menu
+
+const Header = ({ isDarkMode, setIsDarkMode }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+  
+  return (
+    <StyledHeader>
+      <Nav>
+        <Logo to="/">
+          <img src="images/my_pic.jpg" alt="" />
+          <div className="info">
+            <span>Udodirim</span>
+          </div>
+        </Logo>
+
+        <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <FiX /> : <FiMenu />}
+        </MenuButton>
+
+        <TopNavLists open={menuOpen}>
+          <TopNavLis>
+            <NavLink className="nav-links" to="about">
+              About Me
+            </NavLink>
+          </TopNavLis>
+          <TopNavLis>
+            <NavLink className="nav-links" to="contact-me">
+              Contact
+            </NavLink>
+          </TopNavLis>
+          <TopNavLis>
+            <NavLink className="nav-links" to="projects">
+              Projects
+            </NavLink>
+          </TopNavLis>
+          <TopNavLis>
+            <NavLink className="nav-links" to="blog">
+              Blog
+            </NavLink>
+          </TopNavLis>
+
+          <ThemeToggle onClick={toggleTheme}>
+            {isDarkMode ? <FiSun /> : <FiMoon />} Theme
+          </ThemeToggle>
+        </TopNavLists>
+      </Nav>
+    </StyledHeader>
+  );
+};
+
+export default Header;
 
 const StyledHeader = styled.header`
-  border-bottom: 2px solid #10041c78;
+  border-bottom: 2px solid ${({ theme }) => theme.text};
+  z-index: 999;
 `;
 
 const Nav = styled.nav`
@@ -15,9 +75,9 @@ const Nav = styled.nav`
   position: relative;
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
   text-decoration: none;
-    color: ${({ theme }) => theme.text};
+  color: ${({ theme }) => theme.text};
   display: flex;
   gap: 10px;
   align-items: center;
@@ -29,7 +89,7 @@ const Logo = styled.a`
     width: 50px;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #10041c;
+    border: 2px solid ${({ theme }) => theme.text};
   }
   .info {
     display: flex;
@@ -46,16 +106,16 @@ const TopNavLists = styled.ul`
   gap: 30px;
 
   @media (max-width: 768px) {
-    display: ${({ open }) => (open ? "flex" : "none")}; 
+    display: ${({ open }) => (open ? "flex" : "none")};
     flex-direction: column;
     position: absolute;
-    top: 70px;
+    top: 96px;
     right: 0;
-    background: #fff;
-    width: 200px;
-    border: 1px solid #ddd;
+    background: ${({ theme }) => theme.background};
+    width: 100%;
+    border: 1px solid ${({ theme }) => theme.text};
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px ${({ theme }) => theme.paleShadow};
     padding: 1rem;
   }
 `;
@@ -89,38 +149,20 @@ const MenuButton = styled.button`
   border: none;
   font-size: 2rem;
   cursor: pointer;
+  color: ${({ theme }) => theme.text};
 
   @media (max-width: 768px) {
     display: block;
   }
 `;
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+const ThemeToggle = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: ${({ theme }) => theme.text};
 
-  return (
-    <StyledHeader>
-      <Nav>
-        <Logo href="/">
-          <img src="images/my_pic.jpg" alt="" />
-          <div className="info">
-            <span>Udodirim</span>
-          </div>
-        </Logo>
-
-        <MenuButton onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <FiX /> : <FiMenu />} 
-        </MenuButton>
-
-        <TopNavLists open={menuOpen}>
-          <TopNavLis><NavLink className="nav-links" to="about">About Me</NavLink></TopNavLis>
-          <TopNavLis><NavLink className="nav-links" to="contact-me">Contact</NavLink></TopNavLis>
-          <TopNavLis><NavLink className="nav-links" to="projects">Projects</NavLink></TopNavLis>
-          <TopNavLis><NavLink className="nav-links" to="blog">Blog</NavLink></TopNavLis>
-        </TopNavLists>
-      </Nav>
-    </StyledHeader>
-  );
-};
-
-export default Header;
+  @media screen and (min-width: 768px) {
+  }
+`;

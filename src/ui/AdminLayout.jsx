@@ -11,7 +11,7 @@ import {
 } from "react-icons/fi";
 
 const AdminLayout = ({ isDarkMode, setIsDarkMode }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
@@ -37,19 +37,19 @@ const AdminLayout = ({ isDarkMode, setIsDarkMode }) => {
             </Icon>
             {!isCollapsed && "Dashboard"}
           </SidebarItemLink>
-          <SidebarItemLink to="/dashboard/admin/posts">
+          <SidebarItemLink to="/admin/posts">
             <Icon isCollapsed={isCollapsed}>
               <FiFileText />
             </Icon>
             {!isCollapsed && "Blog"}
           </SidebarItemLink>
-          <SidebarItemLink to="/dashboard/admin/project">
+          <SidebarItemLink to="/admin/project">
             <Icon isCollapsed={isCollapsed}>
               <FiFolder />
             </Icon>
             {!isCollapsed && "Projects"}
           </SidebarItemLink>
-          <SidebarItemLink to="/dashboard/admin/settings">
+          <SidebarItemLink to="/admin/settings">
             <Icon isCollapsed={isCollapsed}>
               <FiSettings />
             </Icon>
@@ -72,17 +72,17 @@ const AdminLayout = ({ isDarkMode, setIsDarkMode }) => {
               </NavLink>
             </li>
             <li>
-              <NavLink className="bottomNavIcon" to="/dashboard/admin/posts">
+              <NavLink className="bottomNavIcon" to="/admin/posts">
                 <FiFileText />
               </NavLink>
             </li>
             <li>
-              <NavLink className="bottomNavIcon" to="/dashboard/admin/project">
+              <NavLink className="bottomNavIcon" to="/admin/project">
                 <FiFolder />
               </NavLink>
             </li>
             <li>
-              <NavLink className="bottomNavIcon" to="/dashboard/admin/settings">
+              <NavLink className="bottomNavIcon" to="/admin/settings">
                 <FiSettings />
               </NavLink>
             </li>
@@ -209,7 +209,7 @@ const BottomBar = styled.div`
     bottom: 0;
     width: 100%;
     padding: 1rem 2rem;
-    background-color: ${({ theme }) => theme.text};
+    background: linear-gradient(135deg, #10041c, #2c1a4a);
 
     ul {
       display: flex;
@@ -220,7 +220,7 @@ const BottomBar = styled.div`
       li {
         .bottomNavIcon {
           text-decoration: none;
-          color: ${({ theme }) => theme.background};
+          color: #fff;
           font-size: 2rem;
           &.active {
             color: red;

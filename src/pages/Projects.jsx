@@ -29,7 +29,7 @@ const Projects = () => {
             </div>
             <div className="cardHead">
               <h3>{project.title}</h3>
-              <date>{formatDate(project.created_at)}</date>
+              <date className="date">{formatDate(project.created_at)}</date>
             </div>
             <div className="cardUlr">
               <a href={project.gitHubUrl}>GitHub</a>
@@ -163,6 +163,14 @@ const AllProjectsContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+
+    .date {
+      color: ${({ theme }) => theme.paleText};
+      
+      @media screen and (max-width: 768px) {
+        font-size: 0.8rem;
+      }
+    }
   }
 
   .cardUlr {

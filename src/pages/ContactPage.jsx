@@ -16,291 +16,6 @@ import {
 import Button from "../ui/Button";
 import { personalInfo } from "../../data/data";
 
-const ContactContainer = styled.div`
-  max-width: 120rem;
-  margin: 0 auto;
-  padding: 2rem 4.8rem 0;
-
-  @media (max-width: 768px) {
-    padding: 2rem 2rem 0;
-    margin-bottom: 2rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 2rem 1rem 0;
-  }
-
-  .contactHeader {
-    font-size: 3rem;
-    font-weight: 600;
-    line-height: 56px;
-
-    @media (max-width: 768px) {
-      font-size: 2.5rem;
-      line-height: 48px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 2rem;
-      line-height: 40px;
-    }
-  }
-
-  .contactHeadParagraph {
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 27px;
-    margin-top: 8px;
-    color: #10041cae;
-
-    @media (max-width: 768px) {
-      font-size: 1.125rem;
-      line-height: 24px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 1rem;
-      line-height: 22px;
-    }
-  }
-`;
-
-const ContactForm = styled.form`
-  margin: 2rem auto;
-  padding: 2rem 1.5rem;
-  border: 1px solid #10041c78;
-  border-radius: 10px;
-  box-shadow: 0 0 10px 0 #10041c78;
-
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 1rem;
-  }
-`;
-
-const InputField = styled.input`
-  width: 100%;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  font-size: 1.25rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.125rem;
-    padding: 14px 18px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    padding: 12px 16px;
-  }
-
-  ::placeholder {
-    font-size: 1.25rem;
-    color: #888;
-
-    @media (max-width: 768px) {
-      font-size: 1.125rem;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 1rem;
-    }
-  }
-
-  &:focus {
-    border: 2px solid #10041c;
-  }
-`;
-
-const TextArea = styled.textarea`
-  width: 100%;
-  padding: 16px 20px;
-  margin-bottom: 20px;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  font-size: 1.25rem;
-  resize: none;
-
-  @media (max-width: 768px) {
-    font-size: 1.125rem;
-    padding: 14px 18px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1rem;
-    padding: 12px 16px;
-  }
-
-  ::placeholder {
-    font-size: 1.25rem;
-    color: #888;
-
-    @media (max-width: 768px) {
-      font-size: 1.125rem;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 1rem;
-    }
-  }
-`;
-
-const Flex = styled.div`
-  display: flex;
-  gap: 20px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 15px;
-  }
-`;
-
-const ContactLinks = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  margin-top: 6rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 2rem;
-    margin-top: 4rem;
-  }
-
-  .contactInfo {
-    flex: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 0 10px 0 #10041c78;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .contactItem {
-    display: flex;
-    flex-direction: column;
-
-    strong {
-      font-size: 1.25rem;
-      font-weight: 500;
-      line-height: 32px;
-
-      @media (max-width: 768px) {
-        font-size: 1.125rem;
-        line-height: 28px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 1rem;
-        line-height: 24px;
-      }
-    }
-
-    span,
-    a {
-      color: #10041c;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 26px;
-
-      @media (max-width: 768px) {
-        font-size: 0.875rem;
-        line-height: 22px;
-      }
-
-      @media (max-width: 480px) {
-        font-size: 0.75rem;
-        line-height: 20px;
-      }
-    }
-
-    &:hover :is(a, span) {
-      color: #41097978;
-      text-decoration: underline;
-    }
-  }
-
-  .icon {
-    color: #10041c;
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 32px;
-    margin-right: 5px;
-
-    @media (max-width: 768px) {
-      font-size: 1.125rem;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 1rem;
-    }
-  }
-
-  .socialLinks {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 4rem;
-    border-radius: 12px;
-    box-shadow: 0 0 10px 0 #10041c78;
-
-    @media (max-width: 768px) {
-      padding: 1.5rem;
-    }
-  }
-
-  .socialIcons {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    column-gap: 3rem;
-    row-gap: 1rem;
-    margin-top: 10px;
-    padding: 2rem;
-
-    @media (max-width: 480px) {
-      grid-template-columns: repeat(2, 1fr);
-      padding: 1rem;
-    }
-  }
-
-  a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-  }
-
-  .socialIcon {
-    font-size: 2rem;
-    padding: 4px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-
-    @media (max-width: 768px) {
-      font-size: 2rem;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 2rem;
-    }
-
-    &:hover {
-      border: 1px solid #10041c;
-    }
-  }
-`;
-
 const ContactPage = () => {
   const { email, location, phone, socialLinks } = personalInfo;
 
@@ -368,7 +83,9 @@ const ContactPage = () => {
               <FaComments className="icon" />
               <strong>Get support</strong>
             </div>
-            <a href={`https://wa.me/${phone}`} target="blank">Chat with us</a>
+            <a href={`https://wa.me/${phone}`} target="blank">
+              Chat with us
+            </a>
           </div>
           <div className="contactItem">
             <div>
@@ -415,3 +132,292 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+
+const ContactContainer = styled.div`
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 2rem 4.8rem 0;
+
+  @media (max-width: 768px) {
+    padding: 2rem 2rem 0;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem 0;
+  }
+
+  .contactHeader {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 56px;
+
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
+      line-height: 48px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 2rem;
+      line-height: 40px;
+    }
+  }
+
+  .contactHeadParagraph {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 27px;
+    margin-top: 8px;
+    color: ${({ theme }) => theme.text};
+
+    @media (max-width: 768px) {
+      font-size: 1.125rem;
+      line-height: 24px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+      line-height: 22px;
+    }
+  }
+`;
+
+const ContactForm = styled.form`
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  border: 1px solid ${({ theme }) => theme.border};
+  border-radius: 10px;
+  box-shadow: 0 0 20px ${({ theme }) => theme.liteShadow};
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
+`;
+
+const InputField = styled.input`
+  background-color: ${({ theme }) => theme.inputBackground};
+  color: ${({ theme }) => theme.inputText};
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.25rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.125rem;
+    padding: 14px 18px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+
+  ::placeholder {
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme.paleText};
+
+    @media (max-width: 768px) {
+      font-size: 1.125rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+
+  &:focus {
+    border: 2px solid #10041c;
+  }
+`;
+
+const TextArea = styled.textarea`
+  background-color: ${({ theme }) => theme.inputBackground};
+  color: ${({ theme }) => theme.inputText};
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1.25rem;
+  resize: none;
+
+  @media (max-width: 768px) {
+    font-size: 1.125rem;
+    padding: 14px 18px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+
+  ::placeholder {
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme.paleText};
+
+    @media (max-width: 768px) {
+      font-size: 1.125rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+`;
+
+const Flex = styled.div`
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+const ContactLinks = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 6rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+
+  .contactInfo {
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px ${({ theme }) => theme.liteShadow};
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contactItem {
+    display: flex;
+    flex-direction: column;
+
+    strong {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 32px;
+
+      @media (max-width: 768px) {
+        font-size: 1.125rem;
+        line-height: 28px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 1rem;
+        line-height: 24px;
+      }
+    }
+
+    span,
+    a {
+      color: ${({ theme }) => theme.text};
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 26px;
+
+      @media (max-width: 768px) {
+        font-size: 0.875rem;
+        line-height: 22px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 0.75rem;
+        line-height: 20px;
+      }
+    }
+
+    &:hover :is(a, span) {
+      color: #41097978;
+      text-decoration: underline;
+    }
+  }
+
+  .icon {
+    color: ${({ theme }) => theme.text};
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 32px;
+    margin-right: 5px;
+
+    @media (max-width: 768px) {
+      font-size: 1.125rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+
+  .socialLinks {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 4rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px ${({ theme }) => theme.liteShadow};
+
+    @media (max-width: 768px) {
+      padding: 1.5rem;
+    }
+  }
+
+  .socialIcons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 3rem;
+    row-gap: 1rem;
+    margin-top: 10px;
+    padding: 2rem;
+
+    @media (max-width: 480px) {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 1rem;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.paleText};
+    font-weight: 500;
+  }
+
+  .socialIcon {
+    font-size: 2rem;
+    padding: 4px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      border: 1px solid #10041c;
+    }
+  }
+`;

@@ -54,10 +54,16 @@ export const testimonials = [
 
 export const personalInfo = {
   name: "Udodirim Nnodimele",
-  // role: "UI/UX Designer",
   email: "udodirimwisdom@gmail.com",
   location: "Owerri, Imo State, Nigeria",
   phone: "+2349033951020",
+
+  title: "Frontend Developer",
+  bio: "Passionate about creating beautiful, user-friendly interfaces with React and TypeScript.",
+  website: "https://alexjohnson.dev",
+  password: "",
+  newPassword: "",
+
   socialLinks: [
     {
       name: "LinkedIn",

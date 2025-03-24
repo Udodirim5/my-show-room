@@ -2,6 +2,48 @@ import styled from "styled-components";
 import { projects } from "../../data/data";
 import AnimatedCard from "../ui/AnimatedCard";
 import { Link } from "react-router-dom";
+// import { useProjects } from "../mutationsAndFn/project/useProject";
+
+const LatestProjects = () => {
+    // const {  projects } = useProjects();
+  
+  
+  const latestProjects = projects.slice(-2);
+  return (
+    <LatestProjectsSection>
+      <AnimatedCard index={0} variant="fade">
+        <div className="latestHead">
+          <h2>Latest Projects</h2>
+          <Link to="projects">View All</Link>
+        </div>
+      </AnimatedCard>
+      <LatestHeadParagraph>
+        From concept to reality—explore how we&apos;re bringing groundbreaking
+        ideas to life.
+      </LatestHeadParagraph>
+
+      <LatestProjectsContainer>
+        {latestProjects.map((project, index) => (
+          <AnimatedCard key={project.id} index={index} className="projectCard">
+            <div className="imgContainer">
+              <img src={project.ImageUrl} alt={project.title} />
+            </div>
+            <div className="cardHead">
+              <h3>{project.title}</h3>
+              <date>{project.year}</date>
+            </div>
+            <div className="cardUlr">
+              <a href={project.github}>GitHub</a>
+              <a href={project.link}>Live Demo</a>
+            </div>
+          </AnimatedCard>
+        ))}
+      </LatestProjectsContainer>
+    </LatestProjectsSection>
+  );
+};
+
+export default LatestProjects;
 
 const LatestProjectsSection = styled.section`
   background: ${({ theme }) => theme.background};
@@ -26,7 +68,7 @@ const LatestProjectsSection = styled.section`
     text-decoration: none;
     border-radius: 9px;
     transition: all 0.3s ease;
-    border: 1px solid #333;
+    border: 1px solid ${({ theme }) => theme.border};
 
     &:hover {
       background: #000;
@@ -74,7 +116,7 @@ const LatestProjectsContainer = styled.div`
   margin-top: 2rem;
 
   .projectCard {
-    background: ${({ theme }) => theme.pale};
+    background: ${({ theme }) => theme.cardBackground};
     padding: 1rem;
     border-radius: 9px;
     box-shadow: 0 0 20px ${({ theme }) => theme.liteShadow};
@@ -148,41 +190,3 @@ const LatestProjectsContainer = styled.div`
     }
   }
 `;
-
-const LatestProjects = () => {
-  const latestProjects = projects.slice(-2);
-  return (
-    <LatestProjectsSection>
-      <AnimatedCard index={0} variant="fade">
-        <div className="latestHead">
-          <h2>Latest Projects</h2>
-          <Link to="projects">View All</Link>
-        </div>
-      </AnimatedCard>
-      <LatestHeadParagraph>
-        From concept to reality—explore how we&apos;re bringing groundbreaking
-        ideas to life.
-      </LatestHeadParagraph>
-
-      <LatestProjectsContainer>
-        {latestProjects.map((project, index) => (
-          <AnimatedCard key={project.id} index={index} className="projectCard">
-            <div className="imgContainer">
-              <img src={project.ImageUrl} alt={project.title} />
-            </div>
-            <div className="cardHead">
-              <h3>{project.title}</h3>
-              <date>{project.year}</date>
-            </div>
-            <div className="cardUlr">
-              <a href={project.github}>GitHub</a>
-              <a href={project.link}>Live Demo</a>
-            </div>
-          </AnimatedCard>
-        ))}
-      </LatestProjectsContainer>
-    </LatestProjectsSection>
-  );
-};
-
-export default LatestProjects;

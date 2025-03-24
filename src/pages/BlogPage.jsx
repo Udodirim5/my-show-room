@@ -113,7 +113,7 @@ const AllBlogContainer = styled.div`
     background: ${({ theme }) => theme.background};
     padding: 1rem;
     border-radius: 9px;
-    box-shadow: 0 0 20px ${({ theme }) => theme.paleShadow};
+    box-shadow: 0 0 20px ${({ theme }) => theme.liteShadow};
     transition: all 0.3s ease;
 
     &:hover {
@@ -136,7 +136,7 @@ const AllBlogContainer = styled.div`
     align-items: center;
     margin-bottom: 1rem;
     padding: 1rem 1rem 0 1rem;
-    background: ${({ theme }) => theme.background};
+    background: #f0f0f0;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     overflow: hidden;
