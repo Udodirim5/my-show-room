@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import {
   FiHome,
@@ -61,6 +61,15 @@ const AdminLayout = ({ isDarkMode, setIsDarkMode }) => {
           <Outlet />
         </Content>
       </MainContent>
+
+      <BottomBar>
+        <ul>
+          <li><NavLink className="bottomNavIcon" to="/dashboard"><FiHome /></NavLink></li>
+          <li><NavLink className="bottomNavIcon" to="/dashboard/admin/posts"><FiFileText /></NavLink></li>
+          <li><NavLink className="bottomNavIcon" to="/dashboard/admin/project"><FiFolder /></NavLink></li>
+          <li><NavLink className="bottomNavIcon" to="/dashboard/admin/settings"><FiSettings /></NavLink></li>
+        </ul>
+      </BottomBar>
     </Container>
   );
 };
@@ -69,8 +78,12 @@ export default AdminLayout;
 
 const Container = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   background-color: ${({ theme }) => theme.background};
+
+  @media screen and (max-width: 768px) {
+    padding-bottom: 4rem;
+  }
 `;
 
 const Sidebar = styled.div`
@@ -80,6 +93,10 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const SidebarItem = styled.div`
@@ -147,6 +164,41 @@ const ThemeToggle = styled.button`
 
 const Content = styled.div`
   flex: 1;
-  padding: 20px;
+  padding: 1rem;
   overflow-y: auto;
+
+  @media screen and (max-width: 768px) {
+    padding: 0;
+  }
+`;
+
+const BottomBar = styled.div`
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    background-color: ${({ theme }) => theme.text};
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+
+      li {
+        .bottomNavIcon {
+          text-decoration: none;
+          color: ${({ theme }) => theme.background};
+          font-size: 2rem;
+          &.active{
+            color: red;
+          }
+        }
+      }
+    }
+  }
 `;

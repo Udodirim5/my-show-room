@@ -8,7 +8,7 @@ export default defineConfig({
 
   server: {
     host: true, // Allows access from external networks
-    allowedHosts: ["6bbb-102-90-102-6.ngrok-free.app"], // Allow requests from this host
+    allowedHosts: ["f31d-102-90-100-236.ngrok-free.app"], // Allow requests from this host
   },
 
 })

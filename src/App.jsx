@@ -60,7 +60,15 @@ const App = () => {
                 path="dashboard/admin/project"
                 element={<ProjectTable />}
               />
-              <Route path="dashboard/admin/settings" element={<Settings />} />
+              <Route
+                path="dashboard/admin/settings"
+                element={
+                  <Settings
+                    isDarkMode={isDarkMode}
+                    setIsDarkMode={setIsDarkMode}
+                  />
+                }
+              />
             </Route>
           </Routes>
         </BrowserRouter>

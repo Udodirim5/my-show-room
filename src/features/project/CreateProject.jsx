@@ -19,10 +19,8 @@ const CreateProject = ({ projectToEdit, onCloseModal }) => {
   const { errors } = formState;
 
   const handleSubmitFn = (data) => {
-    console.log("Form Data:", data);
 
     if (!data) {
-      console.error("Form data is undefined!");
       return;
     }
     const image =
