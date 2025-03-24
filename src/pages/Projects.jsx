@@ -5,13 +5,10 @@ import { useProjects } from "../mutationsAndFn/project/useProject";
 import Loader from "../ui/Loader";
 import { formatDate } from "../utils/helper";
 
-
 const Projects = () => {
+  const { isLoading, projects } = useProjects();
 
-  const { isLoading, projects } = useProjects()
-  
-  if(isLoading) return <Loader />
-
+  if (isLoading) return <Loader />;
 
   return (
     <ProjectsSection>
@@ -56,7 +53,7 @@ const Projects = () => {
 export default Projects;
 
 const ProjectsSection = styled.section`
-  background: #f9f9f9;
+  background: ${({ theme }) => theme.background};
   padding: 4rem 2rem;
 
   .latestHead {
@@ -69,7 +66,7 @@ const ProjectsSection = styled.section`
     h2 {
       margin-bottom: 2rem;
       font-size: 2.5rem;
-  
+
       @media screen and (max-width: 768px) {
         font-size: 2rem;
         margin-bottom: 1rem;
@@ -78,9 +75,8 @@ const ProjectsSection = styled.section`
     }
   }
 
-
   a {
-    color: #333;
+    color: ${({ theme }) => theme.paleText};
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
     text-decoration: none;
@@ -117,7 +113,7 @@ const ProjectsSection = styled.section`
 const ProjectsHeadParagraph = styled.p`
   display: block;
   font-size: 1.2rem;
-  color: #333;
+  color: ${({ theme }) => theme.paleText};
   padding: 0 2rem;
 
   @media (max-width: 768px) {
@@ -134,14 +130,14 @@ const AllProjectsContainer = styled.div`
   margin-top: 2rem;
 
   .projectCard {
-    background: #fff;
+    box-shadow: 0 0 20px ${({ theme }) => theme.liteShadow};
+    background: ${({ theme }) => theme.background};
     padding: 1rem;
     border-radius: 9px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 20px ${({ theme }) => theme.shadow};
     }
   }
 
@@ -177,12 +173,12 @@ const AllProjectsContainer = styled.div`
 
   h3 {
     font-size: 1.5rem;
-    color: #333;
+    color: ${({ theme }) => theme.paleText};
   }
 
   p {
     font-size: 1.2rem;
-    color: #666;
+    color: ${({ theme }) => theme.paleText};
     margin-bottom: 1rem;
   }
 

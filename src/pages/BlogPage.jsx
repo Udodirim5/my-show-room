@@ -4,9 +4,7 @@ import AnimatedCard from "../ui/AnimatedCard";
 import Button from "../ui/Button";
 import { Link } from "react-router-dom";
 
-
 const BlogPage = () => {
-  
   return (
     <BlogSection>
       <AnimatedCard index={0} variant="fade">
@@ -50,9 +48,8 @@ const BlogPage = () => {
 
 export default BlogPage;
 
-
 const BlogSection = styled.section`
-  background: #f9f9f9;
+  background: ${({ theme }) => theme.background};
   padding: 4rem 2rem;
 
   .latestHead {
@@ -93,7 +90,7 @@ const BlogSection = styled.section`
 const BlogHeadParagraph = styled.p`
   display: block;
   font-size: 1.2rem;
-  color: #333;
+  color: ${({ theme }) => theme.paleText};
   padding: 0 2rem;
 
   @media (max-width: 768px) {
@@ -109,18 +106,18 @@ const AllBlogContainer = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 2rem;
-  color: #10041c;
+  color: ${({ theme }) => theme.text};
   text-decoration: none;
 
   .blogCard {
-    background: #fff;
+    background: ${({ theme }) => theme.background};
     padding: 1rem;
     border-radius: 9px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px ${({ theme }) => theme.paleShadow};
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 20px ${({ theme }) => theme.shadow};
     }
 
     &:hover img {
@@ -130,7 +127,7 @@ const AllBlogContainer = styled.div`
 
   a {
     text-decoration: none;
-    color: #10041c;
+    color: ${({ theme }) => theme.text};
   }
 
   .imgContainer {
@@ -139,7 +136,7 @@ const AllBlogContainer = styled.div`
     align-items: center;
     margin-bottom: 1rem;
     padding: 1rem 1rem 0 1rem;
-    background: #f0f0f0;
+    background: ${({ theme }) => theme.background};
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     overflow: hidden;
@@ -161,7 +158,7 @@ const AllBlogContainer = styled.div`
 
   h3 {
     font-size: 1.5rem;
-    color: #333;
+      color: ${({ theme }) => theme.text};
   }
 
   .date {
@@ -171,7 +168,7 @@ const AllBlogContainer = styled.div`
 
   .excerpt {
     font-size: 1.2rem;
-    color: #666;
+      color: ${({ theme }) => theme.text};
     margin-bottom: 1rem;
   }
 

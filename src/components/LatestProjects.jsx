@@ -4,7 +4,7 @@ import AnimatedCard from "../ui/AnimatedCard";
 import { Link } from "react-router-dom";
 
 const LatestProjectsSection = styled.section`
-  background: #f9f9f9;
+  background: ${({ theme }) => theme.background};
   padding: 4rem 2rem;
 
   .latestHead {
@@ -20,7 +20,7 @@ const LatestProjectsSection = styled.section`
   }
 
   a {
-    color: #333;
+    color: ${({ theme }) => theme.text};
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
     text-decoration: none;
@@ -57,7 +57,7 @@ const LatestProjectsSection = styled.section`
 const LatestHeadParagraph = styled.p`
   display: block;
   font-size: 1.2rem;
-  color: #333;
+  color: ${({ theme }) => theme.text};
   padding: 0 2rem;
 
   @media (max-width: 768px) {
@@ -74,14 +74,14 @@ const LatestProjectsContainer = styled.div`
   margin-top: 2rem;
 
   .projectCard {
-    background: #fff;
+    background: ${({ theme }) => theme.pale};
     padding: 1rem;
     border-radius: 9px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px ${({ theme }) => theme.liteShadow};
     transition: all 0.3s ease;
 
     &:hover {
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 20px ${({ theme }) => theme.shadow};
     }
   }
 
@@ -117,12 +117,12 @@ const LatestProjectsContainer = styled.div`
 
   h3 {
     font-size: 1.5rem;
-    color: #333;
+    color: ${({ theme }) => theme.text};
   }
 
   p {
     font-size: 1.2rem;
-    color: #666;
+    color: ${({ theme }) => theme.paleText};
     margin-bottom: 1rem;
   }
 

@@ -24,7 +24,7 @@ const StyledHero = styled.div`
       font-size: 4rem;
       font-weight: 600;
       line-height: 75px;
-      color: #10041c;
+      color: ${({ theme }) => theme.text};
 
       @media (max-width: 768px) {
         font-size: 2.5rem;
@@ -35,7 +35,7 @@ const StyledHero = styled.div`
       font-size: 1rem;
       font-weight: 600;
       line-height: 50px;
-      color: #10041c8b;
+      color: ${({ theme }) => theme.text};
       border-radius: 1rem;
       padding: 0.3rem 1rem;
       border: 2px solid #5e0fad;
@@ -81,7 +81,7 @@ const StyledHero = styled.div`
     font-size: 2rem;
     font-weight: 600;
     line-height: 43px;
-    color: #10041c;
+    color: ${({ theme }) => theme.text};
     padding: 0.5rem 2rem;
 
     @media (max-width: 768px) {
@@ -95,7 +95,7 @@ const StyledHero = styled.div`
     padding: 0 2rem;
     font-weight: 400;
     line-height: 27px;
-    color: #10041c;
+    color: ${({ theme }) => theme.text};
   }
 
   .heroLinks {
@@ -132,13 +132,12 @@ const StyledHero = styled.div`
     }
 
     &:nth-child(2) {
-      color: #10041c;
-      border: 2px solid #10041c;
+      color: ${({ theme }) => theme.text};
+      border: 2px solid ${({ theme }) => theme.text};
     }
-
+    
     &:hover {
       background-color: #10041c;
-      color: #fff;
       border: 2px solid #10041c;
     }
   }

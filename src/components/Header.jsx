@@ -17,7 +17,7 @@ const Nav = styled.nav`
 
 const Logo = styled.a`
   text-decoration: none;
-  color: #10041c;
+    color: ${({ theme }) => theme.text};
   display: flex;
   gap: 10px;
   align-items: center;
@@ -63,7 +63,7 @@ const TopNavLists = styled.ul`
 const TopNavLis = styled.li`
   .nav-links {
     text-decoration: none;
-    color: #10041c;
+    color: ${({ theme }) => theme.text};
     border-radius: 9px;
     transition: all 0.3s ease;
     border: 1px solid #333;

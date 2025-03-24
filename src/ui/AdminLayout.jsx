@@ -18,59 +18,78 @@ const AdminLayout = ({ isDarkMode, setIsDarkMode }) => {
   };
 
   return (
-    <Container>
-      <Sidebar isCollapsed={isCollapsed}>
-        <SidebarItem onClick={() => setIsCollapsed(!isCollapsed)}>
-          <Icon isCollapsed={isCollapsed}>{isCollapsed ? "☰" : "✖"}</Icon>
-        </SidebarItem>
-        <SidebarItemLink to="/dashboard">
-          <Icon isCollapsed={isCollapsed}>
-            <FiHome />
-          </Icon>
-          {!isCollapsed && "Dashboard"}
-        </SidebarItemLink>
-        <SidebarItemLink to="/dashboard/admin/posts">
-          <Icon isCollapsed={isCollapsed}>
-            <FiFileText />
-          </Icon>
-          {!isCollapsed && "Blog"}
-        </SidebarItemLink>
-        <SidebarItemLink to="/dashboard/admin/project">
-          <Icon isCollapsed={isCollapsed}>
-            <FiFolder />
-          </Icon>
-          {!isCollapsed && "Projects"}
-        </SidebarItemLink>
-        <SidebarItemLink to="/dashboard/admin/settings">
-          <Icon isCollapsed={isCollapsed}>
-            <FiSettings />
-          </Icon>
-          {!isCollapsed && "Settings"}
-        </SidebarItemLink>
+    <>
+      <Header>
+        <ThemeToggle onClick={toggleTheme}>
+          {isDarkMode ? <FiSun /> : <FiMoon />}
+        </ThemeToggle>
 
-        <Header>
-          <ThemeToggle onClick={toggleTheme}>
-            {isDarkMode ? <FiSun /> : <FiMoon />}
-          </ThemeToggle>
-        </Header>
-      </Sidebar>
+        <Link to="/" className="logo">Udodirim</Link>
+      </Header>
+      <Container>
+        <Sidebar isCollapsed={isCollapsed}>
+          <SidebarItem onClick={() => setIsCollapsed(!isCollapsed)}>
+            <Icon isCollapsed={isCollapsed}>{isCollapsed ? "☰" : "✖"}</Icon>
+          </SidebarItem>
+          <SidebarItemLink to="/dashboard">
+            <Icon isCollapsed={isCollapsed}>
+              <FiHome />
+            </Icon>
+            {!isCollapsed && "Dashboard"}
+          </SidebarItemLink>
+          <SidebarItemLink to="/dashboard/admin/posts">
+            <Icon isCollapsed={isCollapsed}>
+              <FiFileText />
+            </Icon>
+            {!isCollapsed && "Blog"}
+          </SidebarItemLink>
+          <SidebarItemLink to="/dashboard/admin/project">
+            <Icon isCollapsed={isCollapsed}>
+              <FiFolder />
+            </Icon>
+            {!isCollapsed && "Projects"}
+          </SidebarItemLink>
+          <SidebarItemLink to="/dashboard/admin/settings">
+            <Icon isCollapsed={isCollapsed}>
+              <FiSettings />
+            </Icon>
+            {!isCollapsed && "Settings"}
+          </SidebarItemLink>
+        </Sidebar>
 
-      <MainContent>
-        {/* Pass activeTab as a prop */}
-        <Content>
-          <Outlet />
-        </Content>
-      </MainContent>
+        <MainContent>
+          {/* Pass activeTab as a prop */}
+          <Content>
+            <Outlet />
+          </Content>
+        </MainContent>
 
-      <BottomBar>
-        <ul>
-          <li><NavLink className="bottomNavIcon" to="/dashboard"><FiHome /></NavLink></li>
-          <li><NavLink className="bottomNavIcon" to="/dashboard/admin/posts"><FiFileText /></NavLink></li>
-          <li><NavLink className="bottomNavIcon" to="/dashboard/admin/project"><FiFolder /></NavLink></li>
-          <li><NavLink className="bottomNavIcon" to="/dashboard/admin/settings"><FiSettings /></NavLink></li>
-        </ul>
-      </BottomBar>
-    </Container>
+        <BottomBar>
+          <ul>
+            <li>
+              <NavLink className="bottomNavIcon" to="/dashboard">
+                <FiHome />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="bottomNavIcon" to="/dashboard/admin/posts">
+                <FiFileText />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="bottomNavIcon" to="/dashboard/admin/project">
+                <FiFolder />
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="bottomNavIcon" to="/dashboard/admin/settings">
+                <FiSettings />
+              </NavLink>
+            </li>
+          </ul>
+        </BottomBar>
+      </Container>
+    </>
   );
 };
 
@@ -141,13 +160,19 @@ const MainContent = styled.div`
 `;
 
 const Header = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  padding: 1rem 2rem;
+  border-bottom: 2px solid #333;
+  background:   ${({ theme }) => theme.background};
+  box-shadow: 2px 0 5px ${({ theme }) => theme.shadow};
+  
+  .logo{
+    text-decoration: none;
+    color: ${({ theme }) => theme.text};
+  }
+
 `;
 
 const Title = styled.h1`
@@ -155,6 +180,9 @@ const Title = styled.h1`
 `;
 
 const ThemeToggle = styled.button`
+  position: fixed;
+  bottom: 1rem;
+  left: 30px;
   background: none;
   border: none;
   cursor: pointer;
@@ -194,7 +222,7 @@ const BottomBar = styled.div`
           text-decoration: none;
           color: ${({ theme }) => theme.background};
           font-size: 2rem;
-          &.active{
+          &.active {
             color: red;
           }
         }
