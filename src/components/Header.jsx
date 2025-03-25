@@ -20,7 +20,7 @@ const Header = () => {
         <Logo to="/">
           <img src="images/my_pic.jpg" alt="" />
           <div className="info">
-            <span>Udodirim</span>
+            <span>DevMemoir</span>
           </div>
         </Logo>
 

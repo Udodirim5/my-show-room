@@ -10,9 +10,14 @@ import {
   FiMoon,
 } from "react-icons/fi";
 import { useTheme } from "../contexts/ThemeContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const AdminLayout = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const { user, loading, logout } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const username = loading ? "Loading..." : user?.email.split("@")[0];
 
   const { isDarkMode, toggleTheme } = useTheme();
 
@@ -23,7 +28,19 @@ const AdminLayout = () => {
           {isDarkMode ? <FiSun /> : <FiMoon />}
         </ThemeToggle>
 
-        <Link to="/" className="logo">Udodirim</Link>
+        <Link to="/" className="logo">
+          Udodirim
+        </Link>
+
+        <User>
+          <Avatar src="/images/my_pic.jpg" alt={username} />
+          <Dropdown isOpen={isOpen}>
+            <div className="dropdown" onClick={() => setIsOpen(!isOpen)}>
+              <span>{username}</span>
+              <button onClick={logout} className="dropdownBtn">Logout</button>
+            </div>
+          </Dropdown>
+        </User>
       </Header>
       <Container>
         <Sidebar isCollapsed={isCollapsed}>
@@ -152,7 +169,7 @@ const SidebarItemLink = styled(NavLink)`
 `;
 
 const Icon = styled.div`
-margin-top: 3px;
+  margin-top: 3px;
   margin-right: ${({ isCollapsed }) => (isCollapsed ? "0" : "10px")};
   font-size: 20px;
 `;
@@ -169,18 +186,13 @@ const Header = styled.div`
   align-items: center;
   padding: 1rem 2rem;
   border-bottom: 2px solid #333;
-  background:   ${({ theme }) => theme.background};
+  background: ${({ theme }) => theme.background};
   box-shadow: 2px 0 5px ${({ theme }) => theme.shadow};
-  
-  .logo{
+
+  .logo {
     text-decoration: none;
     color: ${({ theme }) => theme.text};
   }
-
-`;
-
-const Title = styled.h1`
-  font-size: 24px;
 `;
 
 const ThemeToggle = styled.button`
@@ -232,5 +244,36 @@ const BottomBar = styled.div`
         }
       }
     }
+  }
+`;
+
+const User = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const Avatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid ${({ theme }) => theme.border};
+`;
+
+const Dropdown = styled.div`
+  position: relative;
+  display: inline-block;
+
+  .dropdownBtn {
+    all: unset;
+    display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+    position: absolute;
+    right: 0;
+    background-color: ${({ theme }) => theme.inputBackground};
+    color: ${({ theme }) => theme.text};
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 0.2rem 1rem;
+    z-index: 1;
   }
 `;
