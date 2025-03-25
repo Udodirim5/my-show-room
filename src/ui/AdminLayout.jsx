@@ -30,7 +30,7 @@ const AdminLayout = () => {
           <SidebarItem onClick={() => setIsCollapsed(!isCollapsed)}>
             <Icon isCollapsed={isCollapsed}>{isCollapsed ? "☰" : "✖"}</Icon>
           </SidebarItem>
-          <SidebarItemLink to="/dashboard">
+          <SidebarItemLink to="/admin/dashboard">
             <Icon isCollapsed={isCollapsed}>
               <FiHome />
             </Icon>
@@ -66,7 +66,7 @@ const AdminLayout = () => {
         <BottomBar>
           <ul>
             <li>
-              <NavLink className="bottomNavIcon" to="/dashboard">
+              <NavLink className="bottomNavIcon" to="/admin/dashboard">
                 <FiHome />
               </NavLink>
             </li>

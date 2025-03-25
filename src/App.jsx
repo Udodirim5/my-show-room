@@ -15,11 +15,14 @@ import ProjectTable from "./pages/ProjectsTable";
 import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./ui/ScrollToTop";
+import AuthForm from "./ui/AuthForm";
+import ProtectedPage from "./ui/ProtectedPage";
+import EmailVerification from "./ui/EmailVerification";
+import ErrorPage from "./pages/ErrorPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // staleTime: 1000 * 60,
       staleTime: 0,
     },
   },
@@ -32,6 +35,7 @@ const App = () => {
         <GlobalStyle />
         <ScrollToTop /> {/* Ensures scroll resets on navigation */}
         <Routes>
+          {/* Public Routes */}
           <Route element={<AppLayout />}>
             <Route index element={<HomePage />} />
             <Route path="/" element={<HomePage />} />
@@ -41,13 +45,27 @@ const App = () => {
             <Route path="blog" element={<BlogPage />} />
             <Route path="blog/:id" element={<BlogSingle />} />
           </Route>
-          <Route element={<AdminLayout />}>
+
+          {/* Protected Admin Routes */}
+          <Route
+            path="/admin/*"
+            element={
+              <ProtectedPage>
+                <AdminLayout />
+              </ProtectedPage>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="/admin/posts" element={<BlogTable />} />
-            <Route path="/admin/project" element={<ProjectTable />} />
-            <Route path="/admin/settings" element={<Settings />} />
+            <Route path="posts" element={<BlogTable />} />
+            <Route path="project" element={<ProjectTable />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
+
+          {/* Authentication Route */}
+          <Route path="/sign-up" element={<AuthForm />} />
+          <Route path="/verify-email" element={<EmailVerification />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
       <Toaster
