@@ -1,16 +1,15 @@
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi"; // Icons for the menu
+import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
+import { useTheme } from "../contexts/ThemeContext";
 
-const Header = ({ isDarkMode, setIsDarkMode }) => {
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+  const { isDarkMode, toggleTheme } = useTheme();
 
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
-
+  
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);

@@ -9,6 +9,87 @@ import {
 import { Link } from "react-router-dom";
 import { personalInfo } from "../../data/data";
 
+
+const Footer = () => {
+  const { email, location, phone, socialLinks } = personalInfo;
+
+  const socialIcons = {
+    LinkedIn: SiLinkedin,
+    Github: SiGithub,
+    Twitter: SiX, // Twitter is now "X"
+    Instagram: SiInstagram,
+    youtube: SiYoutube,
+  };
+
+  return (
+    <StyledFooter>
+      <div className="footer-content">
+        <div className="footer-section">
+          <h3>About Us</h3>
+          <p>
+            We are a creative team dedicated to building amazing digital
+            experiences. Let’s create something extraordinary together!
+          </p>
+        </div>
+        <div className="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="#">Services</Link>
+            </li>
+            <li>
+              <Link to="projects">Portfolio</Link>
+            </li>
+            <li>
+              <Link to="contact-me">Contact</Link>
+            </li>
+          </ul>
+        </div>
+        <div className="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li>
+              Email: <a href={`mailto:${email}`}>{email}</a>
+            </li>
+            <li>Phone: <a href={`tel:${phone}`} aria-label="Phone number">
+              Click to call
+            </a></li>
+            <li>Address: {location}</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="social-icons">
+        {socialLinks.map(({ name, url }) => {
+          const Icon = socialIcons[name];
+          return (
+            Icon && (
+              <a
+                key={name}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={name}
+              >
+                <Icon />
+              </a>
+            )
+          );
+        })}
+      </div>
+      <div className="footer-bottom">
+        &copy; {new Date().getFullYear()} Your Company. All rights reserved. |{" "}
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+      </div>
+    </StyledFooter>
+  );
+};
+
+export default Footer;
+
 const StyledFooter = styled.footer`
   background: linear-gradient(135deg, #10041c, #2c1a4a);
   color: #ffffff;
@@ -115,83 +196,3 @@ const StyledFooter = styled.footer`
     }
   }
 `;
-
-const Footer = () => {
-  const { email, location, phone, socialLinks } = personalInfo;
-
-  const socialIcons = {
-    LinkedIn: SiLinkedin,
-    Github: SiGithub,
-    Twitter: SiX, // Twitter is now "X"
-    Instagram: SiInstagram,
-    youtube: SiYoutube,
-  };
-
-  return (
-    <StyledFooter>
-      <div className="footer-content">
-        <div className="footer-section">
-          <h3>About Us</h3>
-          <p>
-            We are a creative team dedicated to building amazing digital
-            experiences. Let’s create something extraordinary together!
-          </p>
-        </div>
-        <div className="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="#">Services</Link>
-            </li>
-            <li>
-              <Link to="projects">Portfolio</Link>
-            </li>
-            <li>
-              <Link to="contact-me">Contact</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="footer-section">
-          <h3>Contact Info</h3>
-          <ul>
-            <li>
-              Email: <a href={`mailto:${email}`}>{email}</a>
-            </li>
-            <li>Phone: <a href={`tel:${phone}`} aria-label="Phone number">
-              Click to call
-            </a></li>
-            <li>Address: {location}</li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="social-icons">
-        {socialLinks.map(({ name, url }) => {
-          const Icon = socialIcons[name];
-          return (
-            Icon && (
-              <a
-                key={name}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={name}
-              >
-                <Icon />
-              </a>
-            )
-          );
-        })}
-      </div>
-      <div className="footer-bottom">
-        &copy; {new Date().getFullYear()} Your Company. All rights reserved. |{" "}
-        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-      </div>
-    </StyledFooter>
-  );
-};
-
-export default Footer;

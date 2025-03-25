@@ -12,14 +12,16 @@ import {
   FiMoon,
 } from "react-icons/fi";
 import { personalInfo } from "../../data/data";
+import { useTheme } from "../contexts/ThemeContext";
 
-const Settings = ({ isDarkMode, setIsDarkMode }) => {
+const Settings = () => {
   const [formData, setFormData] = useState(personalInfo);
   const [profileImage, setProfileImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(
     "https://randomuser.me/api/portraits/men/99.jpg"
   );
   const fileInputRef = useRef(null);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,9 +47,6 @@ const Settings = ({ isDarkMode, setIsDarkMode }) => {
     alert("Settings saved successfully!");
   };
 
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
 
   return (
     <>

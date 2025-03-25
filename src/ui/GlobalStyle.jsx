@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     scroll-behavior: smooth;
     scrollbar-width: none;
     transition: all 0.3s ease;
+    outline: none;
   }
 
   ::-webkit-scrollbar {

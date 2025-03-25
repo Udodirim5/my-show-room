@@ -10,13 +10,11 @@ import BlogSingle from "./pages/BlogSingle";
 import AdminLayout from "./ui/AdminLayout";
 import Dashboard from "./pages/Dashboard";
 import GlobalStyle from "./ui/GlobalStyle";
-import React, { useState } from "react";
-import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme } from "./utils/theme";
 import BlogTable from "./pages/BlogTable";
 import ProjectTable from "./pages/ProjectsTable";
 import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
+import ScrollToTop from "./ui/ScrollToTop";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,55 +26,30 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-        <BrowserRouter>
-          <GlobalStyle />
-          <Routes>
-            <Route
-              element={
-                <AppLayout
-                  isDarkMode={isDarkMode}
-                  setIsDarkMode={setIsDarkMode}
-                />
-              }
-            >
-              <Route index element={<HomePage />} />
-              <Route path="/" element={<HomePage />} />
-              <Route path="projects" element={<Projects />} />
-              <Route path="contact-me" element={<ContactPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="blog" element={<BlogPage />} />
-              <Route path="blog/:id" element={<BlogSingle />} />
-            </Route>
-            <Route
-              element={
-                <AdminLayout
-                  isDarkMode={isDarkMode}
-                  setIsDarkMode={setIsDarkMode}
-                />
-              }
-            >
-              <Route index element={<Dashboard />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="/admin/posts" element={<BlogTable />} />
-              <Route path="/admin/project" element={<ProjectTable />} />
-              <Route
-                path="/admin/settings"
-                element={
-                  <Settings
-                    isDarkMode={isDarkMode}
-                    setIsDarkMode={setIsDarkMode}
-                  />
-                }
-              />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <ScrollToTop /> {/* Ensures scroll resets on navigation */}
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="contact-me" element={<ContactPage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="blog" element={<BlogPage />} />
+            <Route path="blog/:id" element={<BlogSingle />} />
+          </Route>
+          <Route element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="/admin/posts" element={<BlogTable />} />
+            <Route path="/admin/project" element={<ProjectTable />} />
+            <Route path="/admin/settings" element={<Settings />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
       <Toaster
         position="top-center"
         gutter={12}

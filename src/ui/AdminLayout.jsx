@@ -9,13 +9,12 @@ import {
   FiSun,
   FiMoon,
 } from "react-icons/fi";
+import { useTheme } from "../contexts/ThemeContext";
 
-const AdminLayout = ({ isDarkMode, setIsDarkMode }) => {
+const AdminLayout = () => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
     <>
