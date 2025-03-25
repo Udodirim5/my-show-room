@@ -1,34 +1,27 @@
-import styled from "styled-components";
-import Button from "../../ui/Button";
-import FormRow from "../../ui/FormRow";
-import FileInput from "../../ui/FileInput";
-import Input from "../../ui/Input";
+import { useForm } from "react-hook-form";
+import styled, { keyframes } from "styled-components";
 import { useUpdateProject } from "../../mutationsAndFn/project/useUpdateProject";
 import { useCreateProject } from "../../mutationsAndFn/project/useCreate";
-import { useForm } from "react-hook-form";
 
 const CreateProject = ({ projectToEdit, onCloseModal }) => {
   const { id: editId, ...editValues } = projectToEdit || {};
-
   const isEditSession = Boolean(editId);
-  const { register, handleSubmit, reset, formState } = useForm({
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
-  const { isCreatingProject, createProject } = useCreateProject();
+
+  const { createProject, isCreating: isCreatingProject } = useCreateProject();
   const { updateProject, isUpdating } = useUpdateProject();
-  const { errors } = formState;
+  const isProcessing = isEditSession ? isUpdating : isCreatingProject;
 
-  const handleSubmitFn = (data) => {
-
-    if (!data) {
-      return;
-    }
-    const image =
-      typeof data.image === "string" ? data.image : data.image?.[0] || null;
-
+  const onSubmit = (data) => {
+    const image = typeof data.image === "string" ? data.image : data.image?.[0];
+    const projectData = { ...data, image };
+  
     if (isEditSession) {
       updateProject(
-        { newData: { ...data, image }, id: editId },
+        { newData: projectData, id: editId },
         {
           onSuccess: () => {
             reset();
@@ -37,130 +30,310 @@ const CreateProject = ({ projectToEdit, onCloseModal }) => {
         }
       );
     } else {
-      createProject(
-        { ...data, image },
-        {
-          onSuccess: () => {
-            reset();
-            onCloseModal?.();
-          },
-        }
-      );
+      createProject(projectData, {
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
+      });
     }
   };
-
-  const isProcessing = isEditSession ? isUpdating : isCreatingProject;
-
-  const onErrorFn = (error) => {
-    console.log(error);
-  };
-
+  
   return (
-    <div>
-      <CreateProjectForm onSubmit={handleSubmit(handleSubmitFn, onErrorFn)}>
-        <FormRow
-          label="Project's title"
-          htmlFor="title"
-          errors={errors?.title?.message}
-        >
-          <Input
-            type="text"
-            id="title"
-            disabled={isProcessing}
-            {...register("title", { required: "Project's title is required" })}
-          />
-        </FormRow>
+    <ModalOverlay>
+      <FormCard>
+        <FormHeader>
+          <h2>{isEditSession ? "Edit Project" : "Add New Project"}</h2>
+          <CloseButton onClick={onCloseModal}>&times;</CloseButton>
+        </FormHeader>
 
-        <FormRow
-          label="Live URL"
-          htmlFor="liveUrl"
-          errors={errors?.liveUrl?.message}
-        >
-          <Input
-            type="url"
-            id="liveUrl"
-            disabled={isProcessing}
-            {...register("liveUrl", {
-              required: "Project's live URL is required",
-            })}
-          />
-        </FormRow>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <FormGroup>
+            <Label htmlFor="title">Project Title</Label>
+            <Input
+              id="title"
+              type="text"
+              {...register("title", { required: "Title is required" })}
+              error={!!errors.title}
+            />
+            {errors.title && <Error>{errors.title.message}</Error>}
+          </FormGroup>
 
-        <FormRow
-          label="GitHub URL"
-          htmlFor="gitHubUrl"
-          errors={errors?.gitHubUrl?.message}
-        >
-          <Input
-            type="url"
-            id="gitHubUrl"
-            disabled={isProcessing}
-            {...register("gitHubUrl", { required: " GitHub URL is required" })}
-          />
-        </FormRow>
+          <FormGroup>
+            <Label htmlFor="liveUrl">Live URL</Label>
+            <Input
+              id="liveUrl"
+              type="url"
+              placeholder="https://yourproject.com"
+              {...register("liveUrl", {
+                required: "Live URL is required",
+                pattern: {
+                  value: /^https?:\/\/.+/,
+                  message: "Must start with http:// or https://",
+                },
+              })}
+              error={!!errors.liveUrl}
+            />
+            {errors.liveUrl && <Error>{errors.liveUrl.message}</Error>}
+          </FormGroup>
 
-        <FormRow
-          label="Project photo"
-          htmlFor="image"
-          errors={errors?.image?.message}
-        >
-          <FileInput
-            disabled={isProcessing}
-            id="image"
-            accept="image/*"
-            {...register("image", {
-              required: isEditSession ? false : "Image is required",
-            })}
-          />
-        </FormRow>
+          <FormGroup>
+            <Label htmlFor="gitHubUrl">GitHub URL</Label>
+            <Input
+              id="gitHubUrl"
+              type="url"
+              placeholder="https://github.com/your-repo"
+              {...register("gitHubUrl", {
+                required: "GitHub URL is required",
+                pattern: {
+                  value: /^https?:\/\/.+/,
+                  message: "Must start with http:// or https://",
+                },
+              })}
+              error={!!errors.gitHubUrl}
+            />
+            {errors.gitHubUrl && <Error>{errors.gitHubUrl.message}</Error>}
+          </FormGroup>
 
-        <Flex>
-          <Button
-            disabled={isProcessing}
-            backgroundColor="#10041c"
-            type="submit"
-          >
-            {isEditSession ? "Edit project" : "Create new project"}
-          </Button>
-          <Button
-            disabled={isProcessing}
-            onClick={() => onCloseModal?.()}
-            color="#10041c"
-            backgroundColor="#fff"
-            type="reset"
-          >
-            Cancel
-          </Button>
-        </Flex>
-      </CreateProjectForm>
-    </div>
+          <FormGroup>
+            <Label htmlFor="image">Project Image</Label>
+            <ImageInput
+              type="file"
+              id="image"
+              accept="image/*"
+              {...register("image", {
+                required: isEditSession ? false : "Image is required",
+              })}
+            />
+            {errors.image && <Error>{errors.image.message}</Error>}
+          </FormGroup>
+
+          <ButtonGroup>
+            <PrimaryButton type="submit" disabled={isProcessing}>
+              {isProcessing ? (
+                <Spinner />
+              ) : isEditSession ? (
+                "Update Project"
+              ) : (
+                "Create Project"
+              )}
+            </PrimaryButton>
+            <SecondaryButton
+              type="button"
+              onClick={onCloseModal}
+              disabled={isProcessing}
+            >
+              Cancel
+            </SecondaryButton>
+          </ButtonGroup>
+        </Form>
+      </FormCard>
+    </ModalOverlay>
   );
 };
 
 export default CreateProject;
 
-const CreateProjectForm = styled.form`
-  margin: 2rem auto;
-  padding: 2rem 1.5rem;
-  border-radius: 10px;
-  background: ${({ theme }) => theme.background};
-  color: ${({ theme }) => theme.text};
+// Styled Components
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
 
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
 
-  @media (max-width: 480px) {
-    padding: 1rem;
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: ${fadeIn} 0.3s ease-out;
+`;
+
+const FormCard = styled.div`
+  background: ${({ theme }) => theme.cardBg || "#ffffff"};
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+`;
+
+const FormHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: ${({ theme }) => theme.primary || "#4f46e5"};
+  color: white;
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
   }
 `;
 
-const Flex = styled.div`
-  display: flex;
-  gap: 20px;
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: transform 0.2s;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 15px;
+  &:hover {
+    transform: scale(1.2);
   }
+`;
+
+const Form = styled.form`
+  padding: 1.5rem;
+`;
+
+const FormGroup = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.textPrimary || "#374151"};
+  font-size: 0.9375rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid
+    ${({ theme, error }) =>
+      error ? theme.error || "#ef4444" : theme.border || "#e5e7eb"};
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background: ${({ theme }) => theme.inputBg || "#f9fafb"};
+
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.primary || "#4f46e5"};
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.primaryLight || "#a5b4fc"};
+    background: white;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.placeholder || "#9ca3af"};
+  }
+`;
+
+const ImageInput = styled.input`
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px dashed ${({ theme }) => theme.border || "#e5e7eb"};
+  border-radius: 8px;
+  background: ${({ theme }) => theme.inputBg || "#f9fafb"};
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.primary || "#4f46e5"};
+    background: white;
+  }
+
+  &::file-selector-button {
+    padding: 0.5rem 1rem;
+    background: ${({ theme }) => theme.primaryLight || "#a5b4fc"};
+    border: none;
+    border-radius: 4px;
+    color: ${({ theme }) => theme.primary || "#4f46e5"};
+    font-weight: 600;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: ${({ theme }) => theme.primary || "#4f46e5"};
+      color: white;
+    }
+  }
+`;
+
+const Error = styled.span`
+  display: block;
+  margin-top: 0.5rem;
+  color: ${({ theme }) => theme.error || "#ef4444"};
+  font-size: 0.875rem;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
+
+const BaseButton = styled.button`
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+const PrimaryButton = styled(BaseButton)`
+  background: ${({ theme }) => theme.primary || "#4f46e5"};
+  color: white;
+  border: none;
+
+  &:hover:not(:disabled) {
+    background: ${({ theme }) => theme.primaryDark || "#4338ca"};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  }
+`;
+
+const SecondaryButton = styled(BaseButton)`
+  background: white;
+  color: ${({ theme }) => theme.primary || "#4f46e5"};
+  border: 2px solid ${({ theme }) => theme.primary || "#4f46e5"};
+
+  &:hover:not(:disabled) {
+    background: ${({ theme }) => theme.primaryLight || "#eef2ff"};
+    transform: translateY(-2px);
+  }
+`;
+
+const Spinner = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: ${spin} 1s ease-in-out infinite;
+  margin-right: 8px;
 `;

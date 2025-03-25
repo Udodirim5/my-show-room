@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import styled from "styled-components";
-import CreateProject from "../project/CreateProject";
 import Modal from "../../ui/Modal";
 import { formatDate } from "../../utils/helper";
+import BlogPostForm from "./BlogPostEditor";
+import { useDeletePost } from "../../mutationsAndFn/post/useDeletePost";
 
 const BlogRow = ({ post }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const { deletePost, isDeleting } = useDeletePost();
+
+  const { id: postId, created_at, title } = post;
 
   const handleShowForm = () => {
     setIsOpenModal(true);
@@ -16,23 +20,30 @@ const BlogRow = ({ post }) => {
     <TableRow>
       <Td>
         <MobileLabel>Created At:</MobileLabel>
-        {formatDate(post.createdAt)}
+        {formatDate(created_at)}
       </Td>
       <Td>
         <MobileLabel>Title:</MobileLabel>
-        {post.title.length > 50 ? post.title.slice(0, 50) + "..." : post.title}
+        {title.length > 50 ? title.slice(0, 50) + "..." : title}
       </Td>
       <TdActions>
         <MobileLabel>Actions:</MobileLabel>
         <ActionIcons>
-          <FiEdit onClick={handleShowForm} />
-          <FiTrash />
+          <IconBtn disabled={isDeleting}>
+            <FiEdit onClick={handleShowForm} />
+          </IconBtn>
+          <IconBtn
+            disabled={isDeleting}
+            onClick={() => deletePost(postId)}
+          >
+            <FiTrash />
+          </IconBtn>
         </ActionIcons>
       </TdActions>
       {isOpenModal && (
         <Modal onClose={() => setIsOpenModal(false)}>
-          <CreateProject
-            projectToEdit={post}
+          <BlogPostForm
+            postToEdit={post}
             onCloseModal={() => setIsOpenModal(false)}
           />
         </Modal>
@@ -44,7 +55,6 @@ const BlogRow = ({ post }) => {
 export default BlogRow;
 
 const TableRow = styled.tr`
-
   @media (max-width: 768px) {
     display: block;
     margin-bottom: 1rem;
@@ -52,7 +62,6 @@ const TableRow = styled.tr`
     border-radius: 8px;
     box-shadow: 0 2px 4px ${({ theme }) => theme.shadow};
     background-color: ${({ theme }) => theme.cardBackground};
-
   }
 `;
 
@@ -60,7 +69,6 @@ const Td = styled.td`
   padding: 1rem 0.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.border};
   position: relative;
-  
 
   @media (max-width: 768px) {
     display: block;
@@ -126,4 +134,8 @@ const ActionIcons = styled.div`
     justify-content: flex-end;
     gap: 0.5rem;
   }
+`;
+const IconBtn = styled.button`
+  all: unset;
+  background: none;
 `;

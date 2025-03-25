@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { blogPosts } from "../../data/data";
 import { useProjects } from "../mutationsAndFn/project/useProject";
 
+
 const Dashboard = () => {
     const { isLoading, projects } = useProjects()
   
   return (
     <Container>
+      <Header> Dashboard </Header>
       <MainContent>
         <Card>
           <h2>Total Blog Posts</h2>
@@ -29,9 +31,15 @@ export default Dashboard;
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   height: 100vh;
-  padding: 4rem 2rem;
+  padding: 2rem;
 `;
+
+const Header = styled.h1`
+  font-size: 2rem;
+  margin: 1rem 1.5rem;
+`
 
 const MainContent = styled.div`
   flex: 1;

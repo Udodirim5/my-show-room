@@ -1,11 +1,18 @@
 import styled from "styled-components";
-import { blogPosts } from "../../data/data";
-import AddProject from "../features/project/AddProduct";
 import BlogRow from "../features/post/BlogRow";
+import AddPost from "../features/post/AddPost";
+import { usePosts } from "../mutationsAndFn/post/usePost";
+import Loader from "../ui/Loader";
 
 const BlogTable = () => {
+    const { isLoading, posts } = usePosts();
+  
+    if (isLoading) return <Loader />;
+  
   return (
     <>
+      <Header> All posts </Header>
+
       <TableContainer>
         <Table>
           <thead>
@@ -16,15 +23,15 @@ const BlogTable = () => {
             </tr>
           </thead>
           <tbody>
-            {blogPosts.map((post) => (
-                <BlogRow key={post.id} post={post} />
+            {posts?.map((post) => (
+              <BlogRow key={post.id} post={post} />
             ))}
           </tbody>
         </Table>
       </TableContainer>
 
       <AddNewPost>
-        <AddProject />
+        <AddPost />
       </AddNewPost>
     </>
   );
@@ -39,6 +46,11 @@ const TableContainer = styled.div`
   padding: 1rem;
   border-radius: 10px;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+`;
+
+const Header = styled.h1`
+  font-size: 2rem;
+  margin: 1rem 1.5rem;
 `;
 
 const Table = styled.table`
@@ -61,7 +73,7 @@ const Th = styled.th`
   @media (max-width: 768px) {
     display: none;
   }
-  `;
+`;
 
 const AddNewPost = styled.div`
   display: flex;

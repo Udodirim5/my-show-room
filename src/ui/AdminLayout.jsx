@@ -131,7 +131,7 @@ const SidebarItem = styled.div`
     background-color: ${({ theme }) => theme.background};
   }
 `;
-const SidebarItemLink = styled(Link)`
+const SidebarItemLink = styled(NavLink)`
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -145,9 +145,14 @@ const SidebarItemLink = styled(Link)`
   &:hover {
     background-color: ${({ theme }) => theme.background};
   }
+  &.active {
+    background-color: ${({ theme }) => theme.background};
+    border: 2px solid ${({ theme }) => theme.text};
+  }
 `;
 
 const Icon = styled.div`
+margin-top: 3px;
   margin-right: ${({ isCollapsed }) => (isCollapsed ? "0" : "10px")};
   font-size: 20px;
 `;

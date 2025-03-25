@@ -1,18 +1,18 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
-import CreateProject from "./CreateProject";
+import BlogPostForm from "./BlogPostEditor";
 
-const AddProject = () => {
+const AddPost = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
     <div>
-      <Button onClick={() => setIsOpenModal(true)}>Add new project</Button>
+      <Button onClick={() => setIsOpenModal(true)}>Add new post</Button>
       {isOpenModal && (
         <Modal>
-          <CreateProject
-            projectToEdit={{}}
+          <BlogPostForm
+            postToEdit={{}}
             onCloseModal={() => setIsOpenModal(false)}
           />
         </Modal>
@@ -21,4 +21,4 @@ const AddProject = () => {
   );
 };
 
-export default AddProject;
+export default AddPost;

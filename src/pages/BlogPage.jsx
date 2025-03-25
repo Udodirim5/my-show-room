@@ -1,10 +1,15 @@
 import styled from "styled-components";
-import { blogPosts } from "../../data/data";
 import AnimatedCard from "../ui/AnimatedCard";
 import Button from "../ui/Button";
 import { Link } from "react-router-dom";
+import { usePosts } from "../mutationsAndFn/post/usePost";
+import Loader from "../ui/Loader";
 
 const BlogPage = () => {
+      const { isLoading, posts } = usePosts();
+    
+      if (isLoading) return <Loader />;
+  
   return (
     <BlogSection>
       <AnimatedCard index={0} variant="fade">
@@ -18,7 +23,7 @@ const BlogPage = () => {
       </BlogHeadParagraph>
 
       <AllBlogContainer>
-        {blogPosts.map((blog, index) => (
+        {posts.map((blog, index) => (
           <AnimatedCard key={blog.id} index={index} className="blogCard">
             <Link to={`/blog/${blog.id}`}>
               {/* Keep the link inside the card */}
@@ -35,7 +40,7 @@ const BlogPage = () => {
         ))}
       </AllBlogContainer>
 
-      {blogPosts.length > 8 && (
+      {posts.length > 8 && (
         <LoadMore>
           <Button backgroundColor="#10041c" type="button">
             Load more
