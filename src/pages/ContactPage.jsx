@@ -385,6 +385,7 @@ const ContactLinks = styled.div`
   .socialIcons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background: ${({ theme }) => theme.background};
     column-gap: 3rem;
     row-gap: 1rem;
     margin-top: 10px;
@@ -407,6 +408,8 @@ const ContactLinks = styled.div`
     padding: 4px;
     border-radius: 5px;
     transition: all 0.3s ease;
+    color: ${({ theme }) => theme.text};
+
 
     @media (max-width: 768px) {
       font-size: 2rem;

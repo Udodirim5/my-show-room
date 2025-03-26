@@ -2,9 +2,25 @@ import styled from "styled-components";
 import AnimatedCard from "../ui/AnimatedCard";
 import { Link } from "react-router-dom";
 import { useProjects } from "../mutationsAndFn/project/useProject";
+import PlaceholderLoader from "./PlaceholderLoader";
+import { formatDate } from "../utils/helper";
+
 
 const LatestProjects = () => {
-  const { projects } = useProjects();
+  const { isLoading, projects } = useProjects();
+
+  if (isLoading) {
+    return (
+      <PlaceHolderGrid>
+        <AnimatedCard index={1} variant="fade">
+          <PlaceholderLoader />
+        </AnimatedCard>
+        <AnimatedCard index={2} variant="fade">
+          <PlaceholderLoader />
+        </AnimatedCard>
+      </PlaceHolderGrid>
+    );
+  }
 
   const latestProjects = projects.slice(-2);
   return (
@@ -24,11 +40,11 @@ const LatestProjects = () => {
         {latestProjects.map((project, index) => (
           <AnimatedCard key={project.id} index={index} className="projectCard">
             <div className="imgContainer">
-              <img src={project.ImageUrl} alt={project.title} />
+            <img src={project.image} alt={project.title} />
             </div>
             <div className="cardHead">
               <h3>{project.title}</h3>
-              <date>{project.year}</date>
+              <date>{formatDate(project.created_at)}</date>
             </div>
             <div className="cardUlr">
               <a href={project.github}>GitHub</a>
@@ -186,5 +202,17 @@ const LatestProjectsContainer = styled.div`
     p {
       font-size: 1rem;
     }
+  }
+`;
+
+const PlaceHolderGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 2rem;
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 `;

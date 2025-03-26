@@ -54,7 +54,6 @@ const BlogPage = () => {
 export default BlogPage;
 
 const BlogSection = styled.section`
-  background: ${({ theme }) => theme.background};
   padding: 4rem 2rem;
 
   .latestHead {

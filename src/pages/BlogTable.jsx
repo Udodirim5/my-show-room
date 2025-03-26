@@ -4,15 +4,17 @@ import AddPost from "../features/post/AddPost";
 import { usePosts } from "../mutationsAndFn/post/usePost";
 import Loader from "../ui/Loader";
 import Header from "../components/AdminHead";
+import { useState } from "react";
 
 const BlogTable = () => {
   const { isLoading, posts } = usePosts();
-
+  const [filter, setFilter] = useState("latest");
+  
   if (isLoading) return <Loader />;
-
+  
   return (
     <>
-      <Header title="All posts">
+      <Header title="All posts" filter={filter} setFilter={setFilter}>
         <option value="latest">Latest Meteors</option>
         <option value="popular">Supernova Popular</option>
         <option value="trending">Wormhole Trending</option>

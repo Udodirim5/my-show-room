@@ -7,6 +7,9 @@ import "swiper/css/autoplay"; // Ensure Swiper CSS is included
 import { testimonials } from "../../data/data";
 
 const TestimonialCarousel = () => {
+  const numOfReviews = testimonials.length;
+  if (numOfReviews === 0) return;
+
   return (
     <Carousel>
       <Swiper
@@ -24,7 +27,7 @@ const TestimonialCarousel = () => {
                 <div className="company-logo">
                   <img src={item.logo} alt="Company Logo" />
                 </div>
-                <div className="companyName">Name</div>
+                <div className="companyName">Company Name</div>
               </div>
 
               <div className="testimonial-text">
@@ -45,6 +48,8 @@ const TestimonialCarousel = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <NumberOfReviews>{numOfReviews}</NumberOfReviews>
     </Carousel>
   );
 };
@@ -52,6 +57,8 @@ const TestimonialCarousel = () => {
 export default TestimonialCarousel;
 
 const Carousel = styled.div`
+  position: relative;
+
   .testimonial-swiper {
     width: 100%;
     max-width: 1090px;
@@ -64,7 +71,6 @@ const Carousel = styled.div`
     .testimonial-card {
       padding: 2rem 5rem;
       border-radius: 15px;
-      /* text-align: center; */
       transition: transform 0.3s ease-in-out;
 
       &:hover {
@@ -195,5 +201,18 @@ const Carousel = styled.div`
         }
       }
     }
+  }
+`;
+
+const NumberOfReviews = styled.div`
+  position: absolute;
+  top: 1rem;
+  right: 6rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: ${({ theme }) => theme.paleText};
+
+  @media screen and (max-width: 768px) {
+    right: 2rem;
   }
 `;

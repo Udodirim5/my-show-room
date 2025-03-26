@@ -10,11 +10,11 @@ const Header = () => {
   const location = useLocation();
   const { isDarkMode, toggleTheme } = useTheme();
   const { user } = useAuth();
-  
+
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
-  
+
   return (
     <StyledHeader>
       <Nav>
@@ -50,11 +50,13 @@ const Header = () => {
               Blog
             </NavLink>
           </TopNavLis>
-          {user && <TopNavLis>
-            <NavLink className="nav-links" to="admin/dashboard">
-              Admin
-            </NavLink>
-          </TopNavLis>}
+          {user && (
+            <TopNavLis>
+              <NavLink className="nav-links" to="admin/dashboard">
+                Admin
+              </NavLink>
+            </TopNavLis>
+          )}
 
           <ThemeToggle onClick={toggleTheme}>
             {isDarkMode ? <FiSun /> : <FiMoon />} Theme
@@ -100,6 +102,14 @@ const Logo = styled(Link)`
     display: flex;
     span {
       font-size: 1.8rem;
+      background: linear-gradient(45deg, #8a2be2, #00bfff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
   }
 `;

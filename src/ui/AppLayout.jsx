@@ -10,7 +10,7 @@ const Layout = styled.div`
 `;
 
 const Main = styled.main`
-  padding: 4rem 4.8rem 6.4rem;
+  padding: 4rem 4.8rem ;
   max-width: 120rem;
   margin: 0 auto;
   flex: 1;

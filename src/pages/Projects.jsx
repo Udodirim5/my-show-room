@@ -53,7 +53,6 @@ const Projects = () => {
 export default Projects;
 
 const ProjectsSection = styled.section`
-  background: ${({ theme }) => theme.background};
   padding: 4rem 2rem;
 
   .latestHead {

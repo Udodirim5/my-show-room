@@ -2,6 +2,43 @@ import styled from "styled-components";
 import AnimatedCard from "../ui/AnimatedCard";
 import { Link } from "react-router-dom";
 
+const Hero = () => {
+  return (
+    <StyledHero>
+      <div className="header">
+        <AnimatedCard index={1} variant="fade">
+          <h1>Hey, I’m Udodirim</h1>
+        </AnimatedCard>
+
+        <AnimatedCard index={3} variant="fade">
+          <span>
+            <i className="pulsingDot"></i> Available for New projects
+          </span>
+        </AnimatedCard>
+      </div>
+      <AnimatedCard index={2} variant="fade">
+        <h2 className="subheader">Web Developer</h2>
+      </AnimatedCard>
+      <AnimatedCard index={4} variant="fade">
+        <p className="heroParagraph">
+          I’m a Frontend Developer specializing in React and Next.js. I create
+          high-performance, visually stunning websites that enhance user
+          experiences. With a strong focus on efficiency and design, I deliver
+          projects that are both functional and engaging.
+        </p>
+      </AnimatedCard>
+      <AnimatedCard index={5} variant="fade">
+        <div className="heroLinks">
+          <Link to="about">About Me</Link>
+          <Link to="projects">Explore Works</Link>
+        </div>
+      </AnimatedCard>
+    </StyledHero>
+  );
+};
+
+export default Hero;
+
 const StyledHero = styled.div`
   display: flex;
   flex-direction: column;
@@ -134,10 +171,12 @@ const StyledHero = styled.div`
     &:nth-child(2) {
       color: ${({ theme }) => theme.text};
       border: 2px solid ${({ theme }) => theme.text};
+      background-color: ${({ theme }) => theme.background};
     }
-    
+
     &:hover {
-      background-color: #10041c;
+      color: ${({ theme }) => theme.buttonText};
+      background-color: ${({ theme }) => theme.text};
       border: 2px solid #10041c;
     }
   }
@@ -165,39 +204,3 @@ const StyledHero = styled.div`
     }
   }
 `;
-
-const Hero = () => {
-  return (
-    <StyledHero>
-      <div className="header">
-        <AnimatedCard index={1} variant="fade">
-          <h1>Hey, I’m Udodirim</h1>
-        </AnimatedCard>
-
-        <AnimatedCard index={3} variant="fade">
-          <span>
-            <i className="pulsingDot"></i> Available for New projects
-          </span>
-        </AnimatedCard>
-      </div>
-      <AnimatedCard index={2} variant="fade">
-        <h2 className="subheader">Web Developer</h2>
-      </AnimatedCard>
-      <AnimatedCard index={4} variant="fade">
-        <p className="heroParagraph">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
-          lacus enim. Sed sit amet lacus enim. Sed sit amet lacus enim. Sed sit
-          amet lacus enim.
-        </p>
-      </AnimatedCard>
-      <AnimatedCard index={5} variant="fade">
-        <div className="heroLinks">
-          <Link to="about">About Me</Link>
-          <Link to="projects">Explore Works</Link>
-        </div>
-      </AnimatedCard>
-    </StyledHero>
-  );
-};
-
-export default Hero;

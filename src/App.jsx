@@ -22,6 +22,7 @@ import ErrorPage from "./pages/ErrorPage";
 import ForgottenPassword from "./pages/ForgottenPassword";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import TwinkleBackground from "./ui/TwinkleBackground";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,6 +38,8 @@ const App = () => {
       <BrowserRouter>
         <GlobalStyle />
         <ScrollToTop /> {/* Ensures scroll resets on navigation */}
+        <TwinkleBackground />
+
         <Routes>
           {/* Public Routes */}
           <Route element={<AppLayout />}>

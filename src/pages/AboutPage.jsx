@@ -81,7 +81,6 @@ const StyledAbout = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem 2rem;
-  background: ${({ theme }) => theme.background};
   transition: all 0.3s ease;
 
   &:hover {

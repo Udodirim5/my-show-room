@@ -1,10 +1,8 @@
-import { useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-const Header = ({ title, children }) => {
-  const [filter, setFilter] = useState("latest");
-
+const Header = ({ filter, setFilter, title, children }) => {
   return (
+    
     <CosmicHeader>
       <Title>{title}</Title>
       <CosmicFilter>
@@ -56,6 +54,12 @@ const CosmicHeader = styled.div`
   padding: 1.5rem 2rem;
   position: relative;
   border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+  gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+
+  }
 `;
 
 const Title = styled.h2`
