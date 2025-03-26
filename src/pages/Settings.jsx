@@ -47,6 +47,10 @@ const Settings = () => {
     alert("Settings saved successfully!");
   };
 
+  const handleResetPassword = (e) => {
+    e.preventDefault();
+  };
+
 
   return (
     <>
@@ -78,7 +82,11 @@ const Settings = () => {
               <p>• Formats: JPG, PNG, or GIF</p>
             </ImageTips>
           </ProfileImageSection>
+        </SettingsForm>
 
+
+{/*                             1 */}
+          <SettingsForm onSubmit={handleSubmit}>
           <FormSection>
             <FormGroup>
               <label>
@@ -119,7 +127,11 @@ const Settings = () => {
               />
             </FormGroup>
           </FormSection>
+            <SaveButton type="submit"><FiSave /> Save Changes</SaveButton>
+          </SettingsForm>
 
+{/*                           2 */}
+          <SettingsForm onSubmit={handleSubmit}>
           <FormSection>
             <SectionTitle>Contact Information</SectionTitle>
             <FormGroup>
@@ -148,7 +160,13 @@ const Settings = () => {
               />
             </FormGroup>
           </FormSection>
+            <SaveButton type="submit"><FiSave /> Save Changes</SaveButton>
+          </SettingsForm>
 
+
+          {/*           3 */}
+
+          <SettingsForm onSubmit={handleResetPassword}>
           <FormSection>
             <SectionTitle>Security</SectionTitle>
             <FormGroup>
@@ -177,11 +195,9 @@ const Settings = () => {
               />
             </FormGroup>
           </FormSection>
+          <SaveButton type="submit"><FiSave /> Save Changes</SaveButton>
+          </SettingsForm>
 
-          <SaveButton type="submit">
-            <FiSave /> Save Changes
-          </SaveButton>
-        </SettingsForm>
       </SettingsContainer>
 
       <ThemeToggle onClick={toggleTheme}>
@@ -222,6 +238,9 @@ const SettingsForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  padding-bottom: 1rem;
+  margin-bottom: 4rem;
+  border-bottom:2px solid ${({ theme }) => theme.text};
 `;
 
 const ProfileImageSection = styled.div`
@@ -352,9 +371,10 @@ const SaveButton = styled.button`
   overflow: hidden;
   color: ${({ theme }) => theme.buttonText};
   background: ${({ theme }) => theme.text};
-
+  
   &:hover {
     background: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.inputText};
     transform: translateY(-2px);
   }
 

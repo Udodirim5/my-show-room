@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { blogPosts } from "../../data/data";
+import { usePosts } from "../mutationsAndFn/post/usePost";
 import { useProjects } from "../mutationsAndFn/project/useProject";
 
 
 const Dashboard = () => {
-    const { isLoading, projects } = useProjects()
+  const { isLoading: postsLoading, posts } = usePosts();
+  const { isLoading, projects } = useProjects()
   
   return (
     <Container>
@@ -12,7 +13,7 @@ const Dashboard = () => {
       <MainContent>
         <Card>
           <h2>Total Blog Posts</h2>
-          <p>{blogPosts.length}</p>
+          <p>{postsLoading ? "Loading..." : posts.length}</p>
         </Card>
         <Card>
           <h2>Total Projects</h2>

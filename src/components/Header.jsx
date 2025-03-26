@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi";
 import { useTheme } from "../contexts/ThemeContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const { isDarkMode, toggleTheme } = useTheme();
-
+  const { user } = useAuth();
   
   useEffect(() => {
     setMenuOpen(false);
@@ -49,6 +50,11 @@ const Header = () => {
               Blog
             </NavLink>
           </TopNavLis>
+          {user && <TopNavLis>
+            <NavLink className="nav-links" to="admin/dashboard">
+              Admin
+            </NavLink>
+          </TopNavLis>}
 
           <ThemeToggle onClick={toggleTheme}>
             {isDarkMode ? <FiSun /> : <FiMoon />} Theme

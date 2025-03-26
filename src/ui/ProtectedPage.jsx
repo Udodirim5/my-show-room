@@ -10,7 +10,7 @@ const ProtectedPage = ({ children }) => {
   }
 
   if (!user) {
-    return <Navigate to="/sign-up" replace />;
+    return <Navigate to="/sign/in" replace />;
   }
 
   if (!user.email_confirmed_at) return <Navigate to="/verify-email" replace />;

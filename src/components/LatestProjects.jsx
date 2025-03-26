@@ -1,13 +1,11 @@
 import styled from "styled-components";
-import { projects } from "../../data/data";
 import AnimatedCard from "../ui/AnimatedCard";
 import { Link } from "react-router-dom";
-// import { useProjects } from "../mutationsAndFn/project/useProject";
+import { useProjects } from "../mutationsAndFn/project/useProject";
 
 const LatestProjects = () => {
-    // const {  projects } = useProjects();
-  
-  
+  const { projects } = useProjects();
+
   const latestProjects = projects.slice(-2);
   return (
     <LatestProjectsSection>

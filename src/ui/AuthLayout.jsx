@@ -1,39 +1,20 @@
-import { useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import supabase from "../services/supabase";
+import { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
-const AuthForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLogin, setIsLogin] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const AuthLayout = () => {
+  const { user } = useAuth();
+
   const navigate = useNavigate();
 
-  const { signUp, login } = useAuth(); // Use auth context methods
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-  
-    try {
-      if (isLogin) {
-        await login(email, password);
-      } else {
-        await signUp(email, password);
-      }
-      setError("Successfully authenticated");
-      navigate("/verify-email");
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+  useEffect(() => {
+    if (user) {
+      navigate("/admin/dashboard");
     }
-  };
-  
+  }, [user, navigate]);
+
   return (
     <AuthContainer>
       <AuthCard>
@@ -42,47 +23,17 @@ const AuthForm = () => {
         </Logo>
 
         <AuthTabs>
-          <TabButton active={isLogin} onClick={() => setIsLogin(true)}>
-            Sign In
-          </TabButton>
-          <TabButton active={!isLogin} onClick={() => setIsLogin(false)}>
-            Sign Up
-          </TabButton>
+          <TabButton to="/sign/in">Sign In</TabButton>
+          <TabButton to="/sign/up">Sign Up</TabButton>
         </AuthTabs>
 
-        <Form onSubmit={handleSubmit}>
-          <InputGroup>
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email address"
-              autoComplete="email"
-              autoFocus
-              required
-            />
-          </InputGroup>
-
-          <InputGroup>
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-              minLength="6"
-            />
-          </InputGroup>
-
-          {error && <ErrorMessage>{error}</ErrorMessage>}
-
-          <SubmitButton type="submit" disabled={loading}>
-            {loading ? <Spinner /> : isLogin ? "Sign In" : "Create Account"}
-          </SubmitButton>
-        </Form>
+        <AuthWrapper>
+          <Outlet />
+        </AuthWrapper>
 
         <SocialAuth>
           <p>Or continue with</p>
+
           <SocialButtons>
             <SocialButton
               type="button"
@@ -145,97 +96,26 @@ const AuthTabs = styled.div`
   border-bottom: 1px solid #e5e7eb;
 `;
 
-const TabButton = styled.button`
+const TabButton = styled(NavLink)`
   all: unset;
   margin-top: 2rem;
   flex: 1;
   padding: 0.75rem;
   font-weight: 600;
-  color: ${({ active }) => (active ? "#4f46e5" : "#6b7280")};
-  border-bottom: 2px solid
-    ${({ active }) => (active ? "#4f46e5" : "transparent")};
+  color: #6b7280;
   transition: all 0.2s;
+
+  &.active {
+    color: #4f46e5;
+    border-bottom: 2px solid #4f46e5;
+  }
 
   &:hover {
     color: #4f46e5;
   }
 `;
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-`;
-
-const InputGroup = styled.div`
-  position: relative;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  font-size: 0.9375rem;
-  transition: all 0.2s;
-
-  &:focus {
-    outline: none;
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-  }
-
-  &::placeholder {
-    color: #9ca3af;
-  }
-`;
-
-const ErrorMessage = styled.p`
-  color: #ef4444;
-  font-size: 0.875rem;
-  margin-top: -0.5rem;
-`;
-
-const SubmitButton = styled.button`
-  width: 100%;
-  padding: 0.875rem;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  &:hover {
-    background: #4338ca;
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-`;
-
-const Spinner = styled.div`
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s linear infinite;
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-`;
+const AuthWrapper = styled.div``;
 
 const SocialAuth = styled.div`
   margin-top: 2rem;
@@ -306,4 +186,4 @@ const GithubIcon = () => (
   </svg>
 );
 
-export default AuthForm;
+export default AuthLayout;

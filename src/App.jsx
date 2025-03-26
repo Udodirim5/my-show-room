@@ -15,10 +15,13 @@ import ProjectTable from "./pages/ProjectsTable";
 import Settings from "./pages/Settings";
 import { Toaster } from "react-hot-toast";
 import ScrollToTop from "./ui/ScrollToTop";
-import AuthForm from "./ui/AuthForm";
+import AuthLayout from "./ui/AuthLayout";
 import ProtectedPage from "./ui/ProtectedPage";
 import EmailVerification from "./ui/EmailVerification";
 import ErrorPage from "./pages/ErrorPage";
+import ForgottenPassword from "./pages/ForgottenPassword";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,8 +66,13 @@ const App = () => {
           </Route>
 
           {/* Authentication Route */}
-          <Route path="/sign-up" element={<AuthForm />} />
+          <Route path="/sign" element={<AuthLayout />}>
+            <Route index element={<SignIn />} />
+            <Route path="up" element={<SignUp />} />
+            <Route path="in" element={<SignIn />} />
+          </Route>
           <Route path="/verify-email" element={<EmailVerification />} />
+          <Route path="/forgotten-password" element={<ForgottenPassword />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

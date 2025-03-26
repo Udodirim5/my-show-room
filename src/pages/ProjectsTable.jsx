@@ -3,6 +3,7 @@ import ProjectRow from "../features/project/ProjectRow";
 import { useProjects } from "../mutationsAndFn/project/useProject";
 import Loader from "../ui/Loader";
 import AddProject from "../features/project/AddProduct";
+import Header from "../components/AdminHead";
 
 const ProjectTable = () => {
   const { isLoading, projects } = useProjects();
@@ -11,7 +12,12 @@ const ProjectTable = () => {
 
   return (
     <>
-      <Header> All project </Header>
+      <Header title="All project">
+        <option value="latest">Latest Meteors</option>
+        <option value="popular">Supernova Popular</option>
+        <option value="trending">Wormhole Trending</option>
+        <option value="oldest">Ancient Light Years</option>
+      </Header>
 
       <TableContainer>
         <Table>
@@ -46,10 +52,6 @@ const TableContainer = styled.div`
   padding: 1rem;
   border-radius: 10px;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-`;
-const Header = styled.h1`
-  font-size: 2rem;
-  margin: 1rem 1.5rem;
 `;
 
 const Table = styled.table`

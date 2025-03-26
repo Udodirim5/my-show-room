@@ -3,16 +3,21 @@ import BlogRow from "../features/post/BlogRow";
 import AddPost from "../features/post/AddPost";
 import { usePosts } from "../mutationsAndFn/post/usePost";
 import Loader from "../ui/Loader";
+import Header from "../components/AdminHead";
 
 const BlogTable = () => {
-    const { isLoading, posts } = usePosts();
-  
-    if (isLoading) return <Loader />;
-  
+  const { isLoading, posts } = usePosts();
+
+  if (isLoading) return <Loader />;
+
   return (
     <>
-      <Header> All posts </Header>
-
+      <Header title="All posts">
+        <option value="latest">Latest Meteors</option>
+        <option value="popular">Supernova Popular</option>
+        <option value="trending">Wormhole Trending</option>
+        <option value="oldest">Ancient Light Years</option>
+      </Header>
       <TableContainer>
         <Table>
           <thead>
@@ -46,11 +51,6 @@ const TableContainer = styled.div`
   padding: 1rem;
   border-radius: 10px;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-`;
-
-const Header = styled.h1`
-  font-size: 2rem;
-  margin: 1rem 1.5rem;
 `;
 
 const Table = styled.table`
