@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import AnimatedCard from "../ui/AnimatedCard";
 
 const AboutPage = () => {
@@ -7,9 +7,9 @@ const AboutPage = () => {
       <AnimatedCard index={1} variant="fade">
         <h1 className="header">Hey, I'm Udodirim</h1>
         <p className="aboutHeroParagraph">
-          I don't just design interfaces – I craft digital experiences that make 
-          users do a happy dance. With a background in [UNIQUE_BACKGROUND] and 
-          a passion for [QUIRKY_INTEREST], I bring unexpected creativity to every 
+          I don't just design interfaces – I craft digital experiences that make
+          users do a happy dance. With a background in [UNIQUE_BACKGROUND] and a
+          passion for [QUIRKY_INTEREST], I bring unexpected creativity to every
           pixel I push.
         </p>
       </AnimatedCard>
@@ -17,60 +17,113 @@ const AboutPage = () => {
       <StatsGrid>
         <AnimatedCard index={2} variant="zoom">
           <div className="stat">
-            <h2>[X]+</h2>
-            <h3>Coffee Cups Per Project</h3>
+            <h2>30+</h2>
+            <h3>Projects Completed</h3>
             <p>
-              Each drop fuels my mission to turn "meh" into "magical" – one 
-              meticulously crafted component at a time.
+              Helping various clients around the world by actualizing their idea
+              and vision into reality.
             </p>
           </div>
         </AnimatedCard>
 
         <AnimatedCard index={3} variant="zoom">
           <div className="stat">
-            <h2>[Y]+</h2>
-            <h3>Happy Client Dance Moves</h3>
+            <h2>4+</h2>
+            <h3>Years of Experiences</h3>
             <p>
-              The number of spontaneous celebratory dances performed by clients 
-              after seeing their transformed digital presence.
+              Over 4 years of experience in the field of web development and
+              design.
             </p>
           </div>
         </AnimatedCard>
 
         <AnimatedCard index={4} variant="zoom">
           <div className="stat">
-            <h2>[Z]%</h2>
+            <h2>99%</h2>
             <h3>Of Brain Always Designing</h3>
             <p>
-              Even my shower thoughts are about user flows. It's not an obsession... 
-              okay, maybe just a little.
+              The number of spontaneous celebratory dances performed by clients
+              after seeing their transformed digital presence.
             </p>
           </div>
         </AnimatedCard>
       </StatsGrid>
 
-      <AnimatedCard index={5} variant="fade">
+      <ImageContainer>
+        <AnimatedCard index={5} variant="slide">
+          <img
+            src="images/my_pic.jpg"
+            alt="[YOUR_NAME] in their natural habitat"
+          />
+        </AnimatedCard>
+      </ImageContainer>
+
+      <AnimatedCard index={6} variant="slide">
         <FunFactContainer>
-          <h2>Fun Fact About Me</h2>
+          <h2>My Design Process</h2>
           <p>
-            Before design stole my heart, I used to [UNEXPECTED_PAST_LIFE]. This 
-            gives me a unique perspective when tackling [SPECIFIC_DESIGN_CHALLENGE].
+            My process is simple. I start with your needs, create engaging
+            experiences, research, experiment with ideas, and use your feedback
+            to guide me.
           </p>
         </FunFactContainer>
       </AnimatedCard>
 
-      <ImageContainer>
-        <AnimatedCard index={6} variant="slide">
-          <img 
-            src="images/my_pic.jpg" 
-            alt="[YOUR_NAME] in their natural habitat" 
-          />
-          <PhotoCaption>
-            Pictured: Strategically positioned near plants for that "I-have-my-life-together" 
-            aesthetic. The coffee stain on my notebook is 100% real.
-          </PhotoCaption>
-        </AnimatedCard>
-      </ImageContainer>
+      <AnimatedCard index={7} variant="slide">
+        <Process>
+          <div className="number">1</div>
+          <div className="text">
+            <strong>Ideation & Wireframing</strong>
+            <span>
+              Understanding your business, target audience, and project goals is
+              my first step. I gather insights through research and align on a
+              clear strategy that ensures we’re set up for success.
+            </span>
+          </div>
+        </Process>
+      </AnimatedCard>
+
+      <AnimatedCard index={8} variant="slide">
+        <Process>
+          <div className="number">2</div>
+          <div className="text">
+            <strong>Ideation & Wireframing</strong>
+            <span>
+              Ideation & WireframingBefore diving into detailed design, I create
+              wireframes and prototypes to map out the structure and flow,
+              making sure that the user journey is smooth and intuitive{" "}
+            </span>
+          </div>
+        </Process>
+      </AnimatedCard>
+
+      <AnimatedCard index={9} variant="slide">
+        <Process>
+          <div className="number">3</div>
+          <div className="text">
+            <strong>Design & Development</strong>
+            <span>
+              With the foundation set, I bring the product to life through
+              high-fidelity design and collaborate closely with developers to
+              ensure every interaction is pixel-perfect and functional.
+            </span>
+          </div>
+        </Process>
+      </AnimatedCard>
+
+      <AnimatedCard index={10} variant="slide">
+        <Process>
+          <div className="number">4</div>
+          <div className="text">
+            <strong>Testing & Iteration</strong>
+            <span>
+              I value feedback and use testing insights to refine the design,
+              ensuring that the final product is not only aesthetically pleasing
+              but also highly effective and user-centered.{" "}
+            </span>
+          </div>
+        </Process>
+      </AnimatedCard>
     </StyledAbout>
   );
 };
@@ -97,7 +150,7 @@ const StyledAbout = styled.div`
     line-height: 75px;
     color: ${({ theme }) => theme.accent};
     padding: 0.5rem 2rem;
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
 
     @media (max-width: 768px) {
       font-size: 3rem;
@@ -154,10 +207,12 @@ const StatsGrid = styled.div`
     border: 1px solid ${({ theme }) => theme.border};
     box-shadow: 0 4px 20px ${({ theme }) => theme.liteShadow};
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: ${({ theme }) => theme.buttonText};
 
     &:hover {
+      background: ${({ theme }) => theme.inputBackground};
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px ${({ theme }) => theme.darkShadow};
+      box-shadow: 0 8px 25px ${({ theme }) => theme.buttonText};
     }
 
     h2 {
@@ -187,7 +242,7 @@ const StatsGrid = styled.div`
 const ImageContainer = styled.div`
   overflow: hidden;
   margin: 2rem 0;
-  padding: 0;
+  padding: 2rem;
   border-radius: 1rem;
   position: relative;
 
@@ -216,10 +271,15 @@ const ImageContainer = styled.div`
 
 const FunFactContainer = styled.div`
   padding: 2rem;
-  margin: 2rem 0;
-  background: ${({ theme }) => theme.cardBackground};
+  margin: 2rem 10px;
   border-radius: 1rem;
   border-left: 5px solid ${({ theme }) => theme.accent};
+  background: ${({ theme }) => theme.buttonText};
+
+  &:hover {
+    background: ${({ theme }) => theme.inputBackground};
+    transform: translateY(-5px);
+  }
 
   h2 {
     font-size: 1.8rem;
@@ -234,11 +294,146 @@ const FunFactContainer = styled.div`
   }
 `;
 
-const PhotoCaption = styled.p`
-  font-size: 0.9rem;
-  text-align: center;
-  color: ${({ theme }) => theme.secondaryText};
-  font-style: italic;
-  margin-top: 1rem;
-  padding: 0 2rem;
+const pulse = keyframes`
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+`;
+
+const glow = keyframes`
+  0%, 100% { box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(138, 43, 226, 0); }
+`;
+
+const Process = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  margin: 2rem 10px;
+  gap: 2rem;
+  position: relative;
+  padding: 2rem;
+  border-radius: 16px;
+  background: ${({ theme }) => theme.buttonText};
+
+  &:hover {
+    background: ${({ theme }) => theme.inputBackground};
+    transform: translateY(-5px);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 25px;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      ${({ theme }) => theme.primary || "#8a2be2"},
+      transparent
+    );
+    opacity: 0.3;
+  }
+
+  .number {
+    font-size: 2.5rem;
+    border-radius: 50%;
+    color: ${({ theme }) => theme.buttonText};
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.primary || "#8a2be2"},
+      ${({ theme }) => theme.secondary || "#4b0082"}
+    );
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    animation: ${pulse} 3s ease infinite, ${glow} 3s ease infinite;
+    border: 2px solid
+      ${({ theme }) =>
+        theme.mode === "dark"
+          ? "rgba(255, 255, 255, 0.1)"
+          : "rgba(0, 0, 0, 0.1)"};
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 0.5rem;
+
+    strong {
+      font-size: 1.75rem;
+      line-height: 1.3;
+      font-weight: 700;
+      background: linear-gradient(
+        to right,
+        ${({ theme }) => theme.text},
+        ${({ theme }) => theme.primary || "#8a2be2"}
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    span {
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: ${({ theme }) => theme.text};
+      opacity: 0.9;
+      position: relative;
+      padding-left: 1rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+        height: 80%;
+        width: 3px;
+        background: linear-gradient(
+          to bottom,
+          ${({ theme }) => theme.primary || "#8a2be2"},
+          ${({ theme }) => theme.secondary || "#4b0082"}
+        );
+        border-radius: 3px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 4rem;
+    padding: 1.5rem;
+
+    .number {
+      height: 50px;
+      width: 50px;
+      font-size: 2rem;
+    }
+
+    .text {
+      strong {
+        font-size: 1.5rem;
+      }
+      span {
+        font-size: 1.1rem;
+        padding-left: 0.75rem;
+      }
+    }
+
+    &::before {
+      left: 30px;
+      top: 60px;
+      height: calc(100% - 60px);
+    }
+  }
 `;

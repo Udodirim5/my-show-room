@@ -2,13 +2,20 @@ import styled from "styled-components";
 import AnimatedCard from "../ui/AnimatedCard";
 import Button from "../ui/Button";
 import { useProjects } from "../mutationsAndFn/project/useProject";
-import Loader from "../ui/Loader";
 import { formatDate } from "../utils/helper";
+import PlaceholderLoader from "../components/PlaceholderLoader";
 
 const Projects = () => {
   const { isLoading, projects } = useProjects();
 
-  if (isLoading) return <Loader />;
+  if (isLoading) {
+    return (
+      <PlaceHolderGrid>
+        <PlaceholderLoader />
+        <PlaceholderLoader />
+      </PlaceHolderGrid>
+    );
+  }
 
   return (
     <ProjectsSection>
@@ -51,6 +58,18 @@ const Projects = () => {
 };
 
 export default Projects;
+
+const PlaceHolderGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 2rem;
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
 
 const ProjectsSection = styled.section`
   padding: 4rem 2rem;
@@ -130,13 +149,14 @@ const AllProjectsContainer = styled.div`
 
   .projectCard {
     box-shadow: 0 0 20px ${({ theme }) => theme.liteShadow};
-    background: ${({ theme }) => theme.background};
     padding: 1rem;
-    border-radius: 9px;
-    transition: all 0.3s ease;
+    border-radius: 10px;
+    background: ${({ theme }) => theme.buttonText};
 
     &:hover {
+      background: ${({ theme }) => theme.inputBackground};
       box-shadow: 0 0 20px ${({ theme }) => theme.shadow};
+      transform: translateY(-5px);
     }
   }
 
@@ -158,14 +178,17 @@ const AllProjectsContainer = styled.div`
   }
 
   .cardHead {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 
+    h3{
+      font-size: 1.2rem;
+    }
+
     .date {
       color: ${({ theme }) => theme.paleText};
-      
+      font-size: 1rem;
+
       @media screen and (max-width: 768px) {
         font-size: 0.8rem;
       }

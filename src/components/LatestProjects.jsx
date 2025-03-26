@@ -5,7 +5,6 @@ import { useProjects } from "../mutationsAndFn/project/useProject";
 import PlaceholderLoader from "./PlaceholderLoader";
 import { formatDate } from "../utils/helper";
 
-
 const LatestProjects = () => {
   const { isLoading, projects } = useProjects();
 
@@ -40,11 +39,11 @@ const LatestProjects = () => {
         {latestProjects.map((project, index) => (
           <AnimatedCard key={project.id} index={index} className="projectCard">
             <div className="imgContainer">
-            <img src={project.image} alt={project.title} />
+              <img src={project.image} alt={project.title} />
             </div>
             <div className="cardHead">
               <h3>{project.title}</h3>
-              <date>{formatDate(project.created_at)}</date>
+              <date className="date">{formatDate(project.created_at)}</date>
             </div>
             <div className="cardUlr">
               <a href={project.github}>GitHub</a>
@@ -159,10 +158,21 @@ const LatestProjectsContainer = styled.div`
   }
 
   .cardHead {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    .date {
+      color: ${({ theme }) => theme.paleText};
+      font-size: 1rem;
+
+      @media screen and (max-width: 768px) {
+        font-size: 0.8rem;
+      }
+    }
   }
 
   .cardUlr {

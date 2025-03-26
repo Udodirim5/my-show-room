@@ -3,13 +3,20 @@ import AnimatedCard from "../ui/AnimatedCard";
 import Button from "../ui/Button";
 import { Link } from "react-router-dom";
 import { usePosts } from "../mutationsAndFn/post/usePost";
-import Loader from "../ui/Loader";
+import PlaceholderLoader from "../components/PlaceholderLoader";
 
 const BlogPage = () => {
-      const { isLoading, posts } = usePosts();
-    
-      if (isLoading) return <Loader />;
-  
+  const { isLoading, posts } = usePosts();
+
+  if (isLoading) {
+    return (
+      <PlaceHolderGrid>
+        <PlaceholderLoader />
+        <PlaceholderLoader />
+      </PlaceHolderGrid>
+    );
+  }
+
   return (
     <BlogSection>
       <AnimatedCard index={0} variant="fade">
@@ -26,13 +33,11 @@ const BlogPage = () => {
         {posts.map((blog, index) => (
           <AnimatedCard key={blog.id} index={index} className="blogCard">
             <Link to={`/blog/${blog.id}`}>
-              {/* Keep the link inside the card */}
               <div className="imgContainer">
                 <img src={blog.coverImage} alt={blog.title} />
               </div>
               <div className="cardHead">
                 <h3>{blog.title}</h3>
-                <date className="date">{blog.createdAt}</date>
               </div>
               <p className="excerpt">{blog.excerpt}</p>
             </Link>
@@ -52,6 +57,18 @@ const BlogPage = () => {
 };
 
 export default BlogPage;
+
+const PlaceHolderGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 2rem;
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
 
 const BlogSection = styled.section`
   padding: 4rem 2rem;
@@ -118,9 +135,10 @@ const AllBlogContainer = styled.div`
     padding: 1rem;
     border-radius: 9px;
     box-shadow: 0 0 20px ${({ theme }) => theme.liteShadow};
-    transition: all 0.3s ease;
+    background: ${({ theme }) => theme.buttonText};
 
     &:hover {
+      background: ${({ theme }) => theme.inputBackground};
       box-shadow: 0 0 20px ${({ theme }) => theme.shadow};
     }
 
@@ -162,17 +180,12 @@ const AllBlogContainer = styled.div`
 
   h3 {
     font-size: 1.5rem;
-      color: ${({ theme }) => theme.text};
-  }
-
-  .date {
-    font-size: 1.3rem;
-    font-weight: 400;
+    color: ${({ theme }) => theme.text};
   }
 
   .excerpt {
-    font-size: 1.2rem;
-      color: ${({ theme }) => theme.text};
+    font-size: 1rem;
+    color: ${({ theme }) => theme.text};
     margin-bottom: 1rem;
   }
 

@@ -74,6 +74,7 @@ export default Header;
 
 const StyledHeader = styled.header`
   border-bottom: 2px solid ${({ theme }) => theme.text};
+  background: ${({ theme }) => theme.background};
   z-index: 999;
 `;
 
