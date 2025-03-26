@@ -19,7 +19,10 @@ const Header = () => {
     <StyledHeader>
       <Nav>
         <Logo to="/">
-          <img src="images/my_pic.jpg" alt="" />
+          <img
+            src={`${import.meta.env.BASE_URL}images/my_pic.jpg`}
+            alt="Logo"
+          />
           <div className="info">
             <span>DevMemoir</span>
           </div>
@@ -119,8 +122,8 @@ const TopNavLists = styled.ul`
   list-style: none;
   display: flex;
   gap: 30px;
-
-  @media (max-width: 768px) {
+  
+  @media (max-width: 980px) {
     display: ${({ open }) => (open ? "flex" : "none")};
     flex-direction: column;
     position: absolute;
@@ -133,7 +136,7 @@ const TopNavLists = styled.ul`
     box-shadow: 0px 4px 6px ${({ theme }) => theme.paleShadow};
     padding: 1rem;
   }
-`;
+  `;
 
 const TopNavLis = styled.li`
   .nav-links {
@@ -145,6 +148,10 @@ const TopNavLis = styled.li`
     padding: 0.5rem 1rem;
     display: block;
     text-align: center;
+    
+    @media (max-width: 1111px) {
+    font-size: 1rem;
+  }
 
     &.active {
       background: #000;
@@ -155,7 +162,7 @@ const TopNavLis = styled.li`
       color: #fff;
     }
   }
-`;
+  `;
 
 // Hamburger Button
 const MenuButton = styled.button`
@@ -165,8 +172,8 @@ const MenuButton = styled.button`
   font-size: 2rem;
   cursor: pointer;
   color: ${({ theme }) => theme.text};
-
-  @media (max-width: 768px) {
+  
+  @media (max-width: 980px) {
     display: block;
   }
 `;

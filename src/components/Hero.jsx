@@ -50,11 +50,14 @@ const StyledHero = styled.div`
     align-items: center;
     gap: 20px;
     padding: 0.5rem 2rem;
-
+    
     @media (max-width: 768px) {
       margin-top: 3rem;
       flex-direction: column;
       align-items: center;
+    }
+    @media (max-width: 990px) {
+      align-items: safe;
     }
 
     h1 {
@@ -63,9 +66,15 @@ const StyledHero = styled.div`
       line-height: 75px;
       color: ${({ theme }) => theme.text};
 
-      @media (max-width: 768px) {
+      @media (max-width: 1099px) {
+        font-size: 3rem;
+      }
+
+      @media (max-width: 990px) {
+        margin-right: auto;
         font-size: 2.5rem;
         line-height: 30px;
+
       }
     }
     span {
@@ -80,7 +89,7 @@ const StyledHero = styled.div`
       align-items: center;
       gap: 0.5rem;
 
-      @media (max-width: 768px) {
+      @media (max-width: 900px) {
         display: none;
       }
     }
@@ -120,6 +129,10 @@ const StyledHero = styled.div`
     line-height: 43px;
     color: ${({ theme }) => theme.text};
     padding: 0.5rem 2rem;
+
+    @media (max-width: 1099px) {
+        font-size: 1.5rem;
+      }
 
     @media (max-width: 768px) {
       margin-left: 1rem;

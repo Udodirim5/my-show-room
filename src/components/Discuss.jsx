@@ -10,7 +10,7 @@ const Discuss = () => {
         <Link to="contact-me">Book a Meeting</Link>
       </div>
       <div className="imageContainer">
-        <img src="images/discuss.png" alt="random image" />
+      <img src={`${import.meta.env.BASE_URL}images/discuss.png`} alt="random image" />
       </div>
     </DiscussContainer>
   );
