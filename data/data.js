@@ -1,57 +1,3 @@
-export const projects = [
-  {
-    id: 1,
-    title: "Project 1",
-    ImageUrl: "https://placehold.co/600x400",
-    year: "2021",
-    link: "https://yourprojectlink.com",
-    github: "https://github.com/yourusername/yourproject",
-  },
-  {
-    id: 2,
-    title: "Project 2",
-    ImageUrl: "https://placehold.co/600x400",
-    year: "2021",
-    link: "https://yourprojectlink.com",
-    github: "https://github.com/yourusername/yourproject",
-  },
-  {
-    id: 3,
-    title: "Project 3",
-    ImageUrl: "https://placehold.co/600x400",
-    year: "2021",
-    link: "https://yourprojectlink.com",
-    github: "https://github.com/yourusername/yourproject",
-  },
-];
-
-export const testimonials = [
-  {
-    id: 1,
-    logo: "https://placehold.co/600x400",
-    text: "Working with Harry has been a transformative experience for our product...",
-    author: "Luka Mengham",
-    role: "Chief Executive Officer",
-    image: "https://placehold.co/600x400",
-  },
-  {
-    id: 2,
-    logo: "https://placehold.co/600x400",
-    text: "Harry provided us with excellent service and transformed our design...",
-    author: "John Doe",
-    role: "Product Manager",
-    image: "https://placehold.co/600x400",
-  },
-  {
-    id: 3,
-    logo: "https://placehold.co/600x400",
-    text: "Harry's design has been a game changer for our product. We have seen...",
-    author: "Sarah Johnson",
-    role: "Marketing Manager",
-    image: "https://placehold.co/600x400",
-  },
-];
-
 export const personalInfo = {
   name: "Udodirim Nnodimele",
   email: "udodirimwisdom@gmail.com",
@@ -60,7 +6,7 @@ export const personalInfo = {
 
   title: "Frontend Developer",
   bio: "Passionate about creating beautiful, user-friendly interfaces with React and TypeScript.",
-  website: "https://alexjohnson.dev",
+  website: "https://devmemior.com",
   password: "",
   newPassword: "",
 

@@ -14,6 +14,8 @@ const CreateProject = ({ projectToEdit, onCloseModal }) => {
   const { createProject, isCreating: isCreatingProject } = useCreateProject();
   const { updateProject, isUpdating } = useUpdateProject();
   const isProcessing = isEditSession ? isUpdating : isCreatingProject;
+  console.log("isProcessing:", isProcessing)
+  console.log("isCreatingProject:", isCreatingProject)
 
   const onSubmit = (data) => {
     const image = typeof data.image === "string" ? data.image : data.image?.[0];
@@ -160,7 +162,7 @@ const ModalOverlay = styled.div`
 `;
 
 const FormCard = styled.div`
-  background: ${({ theme }) => theme.cardBg || "#ffffff"};
+  background: ${({ theme }) => theme.background };
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -210,7 +212,7 @@ const Label = styled.label`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: ${({ theme }) => theme.textPrimary || "#374151"};
+  color: ${({ theme }) => theme.text + "80"};
   font-size: 0.9375rem;
 `;
 
@@ -223,13 +225,13 @@ const Input = styled.input`
   border-radius: 8px;
   font-size: 1rem;
   transition: all 0.2s;
-  background: ${({ theme }) => theme.inputBg || "#f9fafb"};
+  background: ${({ theme }) => theme.inputBackground};
 
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.primary || "#4f46e5"};
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.primaryLight || "#a5b4fc"};
-    background: white;
+    box-shadow: 0 0 0 3px ${({ theme }) => theme.shadow};
+    background: ${({ theme }) => theme.paleText};
   }
 
   &::placeholder {
@@ -240,34 +242,34 @@ const Input = styled.input`
 const ImageInput = styled.input`
   width: 100%;
   padding: 0.875rem 1rem;
-  border: 2px dashed ${({ theme }) => theme.border || "#e5e7eb"};
+  border: 2px dashed ${({ theme }) => theme.border };
   border-radius: 8px;
-  background: ${({ theme }) => theme.inputBg || "#f9fafb"};
+  background: ${({ theme }) => theme.inputBackground };
   cursor: pointer;
   transition: all 0.2s;
+  color: ${({ theme }) => theme.text };
 
   &:hover {
-    border-color: ${({ theme }) => theme.primary || "#4f46e5"};
-    background: white;
+    border-color: #4f46e5;
   }
 
   &::file-selector-button {
     padding: 0.5rem 1rem;
-    background: ${({ theme }) => theme.primaryLight || "#a5b4fc"};
+    background: #a5b4fc;
     border: none;
     border-radius: 4px;
-    color: ${({ theme }) => theme.primary || "#4f46e5"};
+    color: #4f46e5;
     font-weight: 600;
     margin-right: 1rem;
     cursor: pointer;
     transition: all 0.2s;
 
     &:hover {
-      background: ${({ theme }) => theme.primary || "#4f46e5"};
+      background: #4f46e5;
       color: white;
     }
   }
-`;
+`
 
 const Error = styled.span`
   display: block;
@@ -323,7 +325,8 @@ const SecondaryButton = styled(BaseButton)`
   border: 2px solid ${({ theme }) => theme.primary || "#4f46e5"};
 
   &:hover:not(:disabled) {
-    background: ${({ theme }) => theme.primaryLight || "#eef2ff"};
+    background: #eef2ff;
+    color: #ef4444;
     transform: translateY(-2px);
   }
 `;

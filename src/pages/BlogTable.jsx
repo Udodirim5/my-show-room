@@ -8,14 +8,14 @@ import { useState } from "react";
 
 const BlogTable = () => {
   const { isLoading, posts } = usePosts();
-  const [filter, setFilter] = useState("latest");
+  const [filter, setFilter] = useState("created_at");
   
   if (isLoading) return <Loader />;
   
   return (
     <>
       <Header title="All posts" filter={filter} setFilter={setFilter}>
-        <option value="latest">Latest Meteors</option>
+        <option value="created_at">Latest</option>
         <option value="popular">Supernova Popular</option>
         <option value="trending">Wormhole Trending</option>
         <option value="oldest">Ancient Light Years</option>

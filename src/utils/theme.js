@@ -2,6 +2,7 @@
 
 export const lightTheme = {
   background: "linear-gradient(to bottom right, #f3f5f7, #f9f9f9)",
+  logo: "linear-gradient(45deg, #ff4500, #ff8c00)",
   text: "#10041c",
   paleText: "#10041c60",
   shadow: "#000000",
@@ -19,6 +20,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   background: "linear-gradient(to bottom right, #1a1a2e, #16213e)",
+  logo: "linear-gradient(45deg, #8a2be2, #00bfff)",
   text: "#ffffff",
   paleText: "#ffffff60",
   shadow: "#000000",

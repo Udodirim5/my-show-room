@@ -106,7 +106,7 @@ const Logo = styled(Link)`
     display: flex;
     span {
       font-size: 1.8rem;
-      background: linear-gradient(45deg, #8a2be2, #00bfff);
+      background: ${({theme}) => theme.logo};
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;

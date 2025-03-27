@@ -39,8 +39,12 @@ const Projects = () => {
               <date className="date">{formatDate(project.created_at)}</date>
             </div>
             <div className="cardUlr">
-              <a href={project.gitHubUrl}>GitHub</a>
-              <a href={project.liveUrl}>Live Demo</a>
+              <a href={project.gitHubUrl} target="black">
+                GitHub
+              </a>
+              <a href={project.liveUrl} target="black">
+                Live Demo
+              </a>
             </div>
           </AnimatedCard>
         ))}
@@ -181,7 +185,7 @@ const AllProjectsContainer = styled.div`
     align-items: center;
     margin-bottom: 1rem;
 
-    h3{
+    h3 {
       font-size: 1.2rem;
     }
 

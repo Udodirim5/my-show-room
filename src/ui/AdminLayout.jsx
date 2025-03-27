@@ -29,15 +29,16 @@ const AdminLayout = () => {
         </ThemeToggle>
 
         <Link to="/" className="logo">
-          Udodirim
+          DevMemoir
         </Link>
 
         <User>
-          <Avatar src="/images/my_pic.jpg" alt={username} />
           <Dropdown isOpen={isOpen}>
             <div className="dropdown" onClick={() => setIsOpen(!isOpen)}>
-              <span>{username}</span>
-              <button onClick={logout} className="dropdownBtn">Logout</button>
+          <Avatar src="/images/my_pic.jpg" alt={username} />
+              <button onClick={logout} className="dropdownBtn">
+                Logout
+              </button>
             </div>
           </Dropdown>
         </User>
@@ -191,7 +192,15 @@ const Header = styled.div`
 
   .logo {
     text-decoration: none;
-    color: ${({ theme }) => theme.text};
+    font-size: 1.8rem;
+    background: ${({ theme }) => theme.logo};
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 0;
+    font-family: "Orbitron", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 `;
 

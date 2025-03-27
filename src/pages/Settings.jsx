@@ -18,7 +18,7 @@ const Settings = () => {
   const [formData, setFormData] = useState(personalInfo);
   const [profileImage, setProfileImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(
-    "https://randomuser.me/api/portraits/men/99.jpg"
+    "/images/my_pic.jpg"
   );
   const fileInputRef = useRef(null);
   const { isDarkMode, toggleTheme } = useTheme();

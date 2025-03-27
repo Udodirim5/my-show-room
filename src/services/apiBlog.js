@@ -10,43 +10,54 @@ export const getPost = async () => {
   }
   return data;
 };
+const BUCKET_NAME = "blogposts";
+const TABLE_NAME = "blogPosts"; // Make sure this matches your Supabase table name
 
 export const createOrEditPost = async (newPost, id) => {
   const imageFile =
     newPost.coverImage instanceof FileList ? newPost.coverImage[0] : newPost.coverImage;
 
-  // Ensure file exists
   if (!imageFile) {
     throw new Error("No image file provided");
   }
 
-  // Make sure bucket name is correct
-  const BUCKET_NAME = "blogposts";
-
-  // Check if URL is already set
   const hasImagePath = newPost.coverImage?.startsWith?.(supabaseUrl);
   const imageName = `${Date.now()}-${imageFile.name}`.replace(/\//g, "");
-
   const imagePath = hasImagePath
     ? newPost.coverImage
     : `${supabaseUrl}/storage/v1/object/public/${BUCKET_NAME}/${imageName}`;
 
-  let query = supabase.from(TableName);
+  let query = supabase.from(TABLE_NAME);
+  let oldImage = null;
 
-  if (!id) {
-    query = query.insert([{ ...newPost, coverImage: imagePath }]);
-  } else {
+  if (id) {
+    // Fetch existing image if updating
+    const { data: existingPost, error: fetchError } = await supabase
+      .from(TABLE_NAME)
+      .select("coverImage")
+      .eq("id", id)
+      .single();
+
+    if (fetchError) {
+      console.error(fetchError);
+      throw new Error("Failed to fetch existing post data");
+    }
+
+    oldImage = existingPost?.coverImage; // Store old image for later deletion
+
     query = query.update({ ...newPost, coverImage: imagePath }).eq("id", id);
+  } else {
+    query = query.insert([{ ...newPost, coverImage: imagePath }]);
   }
 
   const { data, error } = await query.select().maybeSingle();
 
   if (error) {
     console.error(error);
-    throw new Error("Post couldn't be created");
+    throw new Error("Post couldn't be created/updated");
   }
 
-  // ✅ Upload only if it's a new file
+  // ✅ Upload new image only if it's a new file
   if (!hasImagePath) {
     const { error: uploadError } = await supabase.storage
       .from(BUCKET_NAME)
@@ -58,26 +69,53 @@ export const createOrEditPost = async (newPost, id) => {
 
     if (uploadError) {
       console.error(uploadError);
-      if (data?.id) await supabase.from("posts").delete().eq("id", data.id);
+      if (data?.id) await supabase.from(TABLE_NAME).delete().eq("id", data.id);
       throw new Error("Image couldn't be uploaded");
+    }
+
+    // ✅ Delete old image only if it's different from the new one
+    if (id && oldImage && oldImage !== imagePath) {
+      const oldImagePath = oldImage.replace(`${supabaseUrl}/storage/v1/object/public/${BUCKET_NAME}/`, "");
+      if (oldImagePath) {
+        await supabase.storage.from(BUCKET_NAME).remove([oldImagePath]);
+      }
     }
   }
 
   return data;
 };
 
-
 export const deletePostApi = async (id) => {
-  const { data, error } = await supabase
-    .from(TableName)
-    .delete()
+  // Fetch the existing post to get the image URL
+  const { data: post, error: fetchError } = await supabase
+    .from(TABLE_NAME)
+    .select("coverImage")
     .eq("id", id)
-    .select();
+    .single();
 
-  if (error) {
-    console.error(error);
-    throw new Error("post couldn't be deleted");
+  if (fetchError) {
+    console.error(fetchError);
+    throw new Error("Failed to fetch post before deletion");
   }
 
-  return data;
+  // Delete the post from Supabase
+  const { error: deleteError } = await supabase
+    .from(TABLE_NAME)
+    .delete()
+    .eq("id", id);
+
+  if (deleteError) {
+    console.error(deleteError);
+    throw new Error("Post couldn't be deleted");
+  }
+
+  // ✅ Delete associated image
+  if (post?.coverImage) {
+    const oldImagePath = post.coverImage.replace(`${supabaseUrl}/storage/v1/object/public/${BUCKET_NAME}/`, "");
+    if (oldImagePath) {
+      await supabase.storage.from(BUCKET_NAME).remove([oldImagePath]);
+    }
+  }
+
+  return { success: true };
 };

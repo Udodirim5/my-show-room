@@ -7,10 +7,10 @@ const AboutPage = () => {
       <AnimatedCard index={1} variant="fade">
         <h1 className="header">Hey, I'm Udodirim</h1>
         <p className="aboutHeroParagraph">
-          I don't just design interfaces – I craft digital experiences that make
-          users do a happy dance. With a background in [UNIQUE_BACKGROUND] and a
-          passion for [QUIRKY_INTEREST], I bring unexpected creativity to every
-          pixel I push.
+          I don’t just design interfaces—I create digital experiences that
+          delight users. With a background in tech and a passion for
+          creativity, I blend creativity and strategy to craft designs that
+          feel as good as they look.
         </p>
       </AnimatedCard>
 
@@ -50,7 +50,7 @@ const AboutPage = () => {
       </StatsGrid>
 
       <ImageContainer>
-        <AnimatedCard index={5} variant="slide">
+        <AnimatedCard index={5} variant="fade">
           <img
             src="images/my_pic.jpg"
             alt="[YOUR_NAME] in their natural habitat"
@@ -58,72 +58,62 @@ const AboutPage = () => {
         </AnimatedCard>
       </ImageContainer>
 
-      <AnimatedCard index={6} variant="slide">
-        <FunFactContainer>
-          <h2>My Design Process</h2>
-          <p>
-            My process is simple. I start with your needs, create engaging
-            experiences, research, experiment with ideas, and use your feedback
-            to guide me.
-          </p>
-        </FunFactContainer>
-      </AnimatedCard>
+      <FunFactContainer>
+        <h2>My Design Process</h2>
+        <p>
+          My process is simple. I start with your needs, create engaging
+          experiences, research, experiment with ideas, and use your feedback to
+          guide me.
+        </p>
+      </FunFactContainer>
 
-      <AnimatedCard index={7} variant="slide">
-        <Process>
-          <div className="number">1</div>
-          <div className="text">
-            <strong>Ideation & Wireframing</strong>
-            <span>
-              Understanding your business, target audience, and project goals is
-              my first step. I gather insights through research and align on a
-              clear strategy that ensures we’re set up for success.
-            </span>
-          </div>
-        </Process>
-      </AnimatedCard>
+      <Process>
+        <div className="number">1</div>
+        <div className="text">
+          <strong>Ideation & Wireframing</strong>
+          <span>
+            Understanding your business, target audience, and project goals is
+            my first step. I gather insights through research and align on a
+            clear strategy that ensures we’re set up for success.
+          </span>
+        </div>
+      </Process>
 
-      <AnimatedCard index={8} variant="slide">
-        <Process>
-          <div className="number">2</div>
-          <div className="text">
-            <strong>Ideation & Wireframing</strong>
-            <span>
-              Ideation & WireframingBefore diving into detailed design, I create
-              wireframes and prototypes to map out the structure and flow,
-              making sure that the user journey is smooth and intuitive{" "}
-            </span>
-          </div>
-        </Process>
-      </AnimatedCard>
+      <Process>
+        <div className="number">2</div>
+        <div className="text">
+          <strong>Ideation & Wireframing</strong>
+          <span>
+            Ideation & WireframingBefore diving into detailed design, I create
+            wireframes and prototypes to map out the structure and flow, making
+            sure that the user journey is smooth and intuitive{" "}
+          </span>
+        </div>
+      </Process>
 
-      <AnimatedCard index={9} variant="slide">
-        <Process>
-          <div className="number">3</div>
-          <div className="text">
-            <strong>Design & Development</strong>
-            <span>
-              With the foundation set, I bring the product to life through
-              high-fidelity design and collaborate closely with developers to
-              ensure every interaction is pixel-perfect and functional.
-            </span>
-          </div>
-        </Process>
-      </AnimatedCard>
+      <Process>
+        <div className="number">3</div>
+        <div className="text">
+          <strong>Design & Development</strong>
+          <span>
+            With the foundation set, I bring the product to life through
+            high-fidelity design and collaborate closely with developers to
+            ensure every interaction is pixel-perfect and functional.
+          </span>
+        </div>
+      </Process>
 
-      <AnimatedCard index={10} variant="slide">
-        <Process>
-          <div className="number">4</div>
-          <div className="text">
-            <strong>Testing & Iteration</strong>
-            <span>
-              I value feedback and use testing insights to refine the design,
-              ensuring that the final product is not only aesthetically pleasing
-              but also highly effective and user-centered.{" "}
-            </span>
-          </div>
-        </Process>
-      </AnimatedCard>
+      <Process>
+        <div className="number">4</div>
+        <div className="text">
+          <strong>Testing & Iteration</strong>
+          <span>
+            I value feedback and use testing insights to refine the design,
+            ensuring that the final product is not only aesthetically pleasing
+            but also highly effective and user-centered.{" "}
+          </span>
+        </div>
+      </Process>
     </StyledAbout>
   );
 };
@@ -186,7 +176,8 @@ const StatsGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   padding: 2rem;
   gap: 2rem;
-  margin: 2rem 0;
+  margin: 0;
+  margin-top: 2rem;
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
@@ -202,7 +193,7 @@ const StatsGrid = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-height: 300px;
+    min-height: 350px;
     border-radius: 1rem;
     border: 1px solid ${({ theme }) => theme.border};
     box-shadow: 0 4px 20px ${({ theme }) => theme.liteShadow};
@@ -308,7 +299,7 @@ const glow = keyframes`
 const Process = styled.div`
   display: flex;
   margin-top: 2rem;
-  margin: 2rem 10px;
+  margin: 10px;
   gap: 2rem;
   position: relative;
   padding: 2rem;
@@ -410,8 +401,8 @@ const Process = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 4rem;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
     padding: 1.5rem;
 
     .number {

@@ -46,8 +46,12 @@ const LatestProjects = () => {
               <date className="date">{formatDate(project.created_at)}</date>
             </div>
             <div className="cardUlr">
-              <a href={project.github}>GitHub</a>
-              <a href={project.link}>Live Demo</a>
+              <a href={project.gitHubUrl} target="black">
+                GitHub
+              </a>
+              <a href={project.liveUrl} target="black">
+                Live Demo
+              </a>
             </div>
           </AnimatedCard>
         ))}

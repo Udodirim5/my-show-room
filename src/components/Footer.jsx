@@ -8,7 +8,7 @@ import {
 } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { personalInfo } from "../../data/data";
-
+import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 
 const Footer = () => {
   const { email, location, phone, socialLinks } = personalInfo;
@@ -52,12 +52,21 @@ const Footer = () => {
           <h3>Contact Info</h3>
           <ul>
             <li>
-              Email: <a href={`mailto:${email}`}>{email}</a>
+              <a href={`mailto:${email}`}>
+                <FaEnvelope />
+              </a>
             </li>
-            <li>Phone: <a href={`tel:${phone}`} aria-label="Phone number">
-              Click to call
-            </a></li>
-            <li>Address: {location}</li>
+            <li>
+              
+              <a href={`tel:${phone}`} aria-label="Phone number">
+                <FaPhoneAlt />
+              </a>
+            </li>
+            <li>
+              <a href={`${location}`} aria-label="location">
+              <FaMapMarkerAlt />
+              </a>
+              </li>
           </ul>
         </div>
       </div>

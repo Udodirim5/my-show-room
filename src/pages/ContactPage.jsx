@@ -15,21 +15,40 @@ import {
 
 import Button from "../ui/Button";
 import { personalInfo } from "../../data/data";
+import toast from "react-hot-toast";
 
 const ContactPage = () => {
-  const { email, location, phone, socialLinks } = personalInfo;
+  const { email: myEmail, location, phone, socialLinks } = personalInfo;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!e.target.checkValidity()) {
-      alert("Please fill out all fields.");
+      toast.error("Please fill out all fields.");
       return;
     }
-    // Send form data to your server
-    console.log(e.target.elements);
-    alert("Form submitted successfully!");
-    e.target.reset();
+
+    const formData = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      subject: e.target.subject.value,
+      message: e.target.message.value,
+    };
+
+    try {
+      const response = await fetch("https://your-api-endpoint.com/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error("Failed to send message.");
+
+      toast.success("Message sent successfully!");
+      e.target.reset();
+    } catch (err) {
+      toast.error("Something went wrong. Please try again.");
+    }
   };
 
   const socialIcons = {
@@ -51,19 +70,23 @@ const ContactPage = () => {
         <Flex>
           <InputField
             type="text"
+            name="name"
             placeholder="Your Name"
             required
             autoComplete="name"
           />
           <InputField
             type="email"
+            name="email"
             placeholder="Your Email"
             required
             autoComplete="email"
           />
         </Flex>
-        <InputField type="text" placeholder="Subject" required />
-        <TextArea placeholder="Message"></TextArea>
+
+        <InputField type="text" name="subject" placeholder="Subject" required />
+        <TextArea name="message" placeholder="Message" required></TextArea>
+
         <Button backgroundColor="#10041c" type="submit">
           Submit
         </Button>
@@ -75,7 +98,7 @@ const ContactPage = () => {
               <FaEnvelope className="icon" />
               <strong>Email</strong>
             </div>
-            <a href={`mailto:${email}`}>{email}</a>
+            <a href={`mailto:${myEmail}`}>{myEmail}</a>
           </div>
 
           <div className="contactItem">
@@ -409,7 +432,6 @@ const ContactLinks = styled.div`
     border-radius: 5px;
     transition: all 0.3s ease;
     color: ${({ theme }) => theme.text};
-
 
     @media (max-width: 768px) {
       font-size: 2rem;

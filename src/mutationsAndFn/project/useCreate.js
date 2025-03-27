@@ -6,7 +6,7 @@ import { createOrEditProject } from "../../services/apiProjects";
 export const useCreateProject = () => {
   const queryClient = useQueryClient();
 
-  const { mutate: createProject, isLoading: isCreatingProject } = useMutation({
+  const mutation = useMutation({
     mutationFn: createOrEditProject,
     onSuccess: () => {
       toast.success("Project created successfully!");
@@ -15,5 +15,27 @@ export const useCreateProject = () => {
     onError: (error) => toast.error(error.message),
   });
 
+  console.log(mutation); // Debugging output
+
+  const { mutate: createProject, isLoading: isCreatingProject } = mutation;
+
   return { createProject, isCreatingProject };
 };
+
+
+
+
+// export const useCreateProject = () => {
+//   const queryClient = useQueryClient();
+
+//   const { mutate: createProject, isLoading: isCreatingProject } = useMutation({
+//     mutationFn: createOrEditProject,
+//     onSuccess: () => {
+//       toast.success("Project created successfully!");
+//       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.PROJECTS });
+//     },
+//     onError: (error) => toast.error(error.message),
+//   });
+
+//   return { createProject, isCreatingProject };
+// };
